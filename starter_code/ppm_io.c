@@ -46,4 +46,3 @@ int write_ppm(FILE *fp, const Image *im) {
 
   return num_pixels_written;
 }
-

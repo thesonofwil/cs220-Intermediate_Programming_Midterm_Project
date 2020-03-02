@@ -15,5 +15,10 @@
 #include <stdio.h>
 #include
 
-int grabPixel(FILE* image) {
+// struct pixel defined in header file
+// struct image deinfed in header file
+
+// Loops through an image and returns a list of rgb values separately 
+int get_pixel(FILE* image, int x, int y) {
+  
 }
