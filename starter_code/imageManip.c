@@ -6,3 +6,14 @@
 // 6. swirl - swirl the image
 // 7. blur - blur the image (smooth and soften its edges) by a specified amount
 // Wilson (1-3), Anire (4-6)
+
+// image is a 2D array (rows and columns)
+// loop through each pixel and apply operator
+
+// write a function that loops through image and returns each pixel
+
+#include <stdio.h>
+#include
+
+int grabPixel(FILE* image) {
+}
