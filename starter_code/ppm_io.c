@@ -86,3 +86,20 @@ int write_ppm(FILE *fp, const Image *im) {
 
   return num_pixels_written;
 }
+
+int main(int argc, char *argv[]) {
+  //checks if the user input a file name
+  if(argc == 1) {
+    printf("File name was not put in.");
+    return 1;
+  }
+  //makes sure the command line argument is just two
+  if(argc != 2){
+    printf("File could not be opened\n");
+    return 2;
+  }
+
+  File *input = fopen(argv[1], "rb");
+  Image *a = read_ppm(input);
+  File *output = fopen("test.ppm", "wb");
+  
