@@ -28,3 +28,7 @@ int get_pixel(FILE* image, int x, int y) {
 // Shift the exposure of the image by a factor of val
 void change_exposure(Image *img, float val) {
 }  
+
+//blends two images by a given ratio
+void change_blend(Image *img, float val){
+}
