@@ -27,7 +27,3 @@ int get_pixel(FILE* image, int x, int y) {
 
 // Shift the exposure of the image by a factor of val
 void change_exposure(Image *img, float val) {
-}
-
-void pointilism(Image *img) {
-}
