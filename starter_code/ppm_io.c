@@ -1,12 +1,13 @@
-
-// __Add your name and JHED above__
+// Anire Egbe, Wilson Tjoeng
+// , wtjoeng1
 // ppm_io.c
 // 601.220, Spring 2019
 // Starter code for midterm project - feel free to edit/add to this file
 
 #include <assert.h>
+#include <stdlib.h>
 #include "ppm_io.h"
-
+#include <string.h>
 
 
 /* Read a PPM-formatted image from a file (assumes fp != NULL).
@@ -15,10 +16,49 @@
  */
 Image * read_ppm(FILE *fp) {
 
+  // PPM format:
+  //   Top: tag that marks the file as PPM (should be "P6")
+  //   Next: three numbers representing columns, rows, and colors. 
+  //   Color = 255, the max value
+  //   Comments are marked by '#'
   // check that fp is not NULL
   assert(fp); 
 
-  return NULL;  //TO DO: replace this stub
+  char type[3];
+  //int columns, rows,
+  int colorSize;
+  
+  Image *image = (Image *)malloc(sizeof(Image)); // allocate storage to hold image
+  
+  // Assuming file is already opened in binary format
+  // Check file type is P6
+  fscanf(fp, "%2s", type); // read 2 characters into type
+  type[2] = '\0';
+  if (strcmp(type, "P6") != 0) {
+    printf("Invalid file type.\n");
+    exit(1);
+  }
+
+  // Skip comments if any. Assume there is at most one line of comment.
+  if (fgetc(fp) == '#') {
+    fscanf(fp, "%*[^\n]\n"); // move pointer to next line
+  }
+
+  // Read the next three int values
+  fscanf(fp, "%d%d%d\n", &image->cols, &image->rows, &colorSize);
+  if (colorSize != 255) { // It must always equal 255
+    printf("The value for colors must be 255.\n");
+    exit(1);
+  }
+
+  image->data = (Pixel *)malloc(image->cols * image->rows * sizeof(Pixel)); // array to hold rgb
+  
+  // Read rgb values of pixels then store into an array
+  fread(image->data, sizeof(Pixel), image->cols * image->rows * 3, fp); 
+
+  fclose(fp);
+  // free mallocs in main?
+  return image;  //TO DO: replace this stub
   
 }
 

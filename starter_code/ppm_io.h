@@ -1,5 +1,5 @@
-
-// __Add your name and JHED above__
+// Anire Egbe, Wilson Tjoeng
+// , wtjoeng1
 // ppm_io.h
 // 601.220, Spring 2019
 // Starter code for midterm project - feel free to edit/add to this file
