@@ -40,10 +40,14 @@ Image * read_ppm(FILE *fp) {
   }
 
   // Skip comments if any. Assume there is at most one line of comment.
-  if (fgetc(fp) == '#') {
-    fscanf(fp, "%*[^\n]\n"); // move pointer to next line
+  int c;
+  c = getc(fp);
+  while (c == '#') {
+    while (getc(fp) != '\n');
+    c = getc(fp);
   }
-
+  ungetc(c, fp);
+  
   // Read the next three int values
   fscanf(fp, "%d%d%d\n", &image->cols, &image->rows, &colorSize);
   if (colorSize != 255) { // It must always equal 255
@@ -85,4 +89,14 @@ int write_ppm(FILE *fp, const Image *im) {
   }
 
   return num_pixels_written;
+}
+
+int main() {
+  FILE* image = fopen("data/building.ppm", "rb");
+  Image *img = read_ppm(image);
+  FILE *im2 = fopen("test.ppm", "wb");
+  write_ppm(im2, img);
+  fclose(image);
+  fclose(im2);
+  return 0;
 }
