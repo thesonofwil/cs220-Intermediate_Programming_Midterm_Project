@@ -6,8 +6,10 @@
 
 #include <assert.h>
 #include <stdlib.h>
-#include "ppm_io.h"
+#include <stdio.h>
+#include <ctype.h>
 #include <string.h>
+#include "ppm_io.h"
 
 
 /* Read a PPM-formatted image from a file (assumes fp != NULL).
@@ -16,23 +18,18 @@
  */
 Image * read_ppm(FILE *fp) {
 
-  // PPM format:
-  //   Top: tag that marks the file as PPM (should be "P6")
-  //   Next: three numbers representing columns, rows, and colors. 
-  //   Color = 255, the max value
-  //   Comments are marked by '#'
-  // check that fp is not NULL
+   // check that fp is not NULL
   assert(fp); 
 
   char type[3];
-  //int columns, rows,
   int colorSize;
+  int columns, rows;
   
   Image *image = (Image *)malloc(sizeof(Image)); // allocate storage to hold image
   
   // Assuming file is already opened in binary format
   // Check file type is P6
-  fscanf(fp, "%2s", type); // read 2 characters into type
+  fscanf(fp, "%2s \n", type); // read 2 characters into type
   type[2] = '\0';
   if (strcmp(type, "P6") != 0) {
     printf("Invalid file type.\n");
@@ -40,30 +37,32 @@ Image * read_ppm(FILE *fp) {
   }
 
   // Skip comments if any. Assume there is at most one line of comment.
-  int c;
-  c = getc(fp);
-  while (c == '#') {
-    while (getc(fp) != '\n');
-    c = getc(fp);
+  if (fgetc(fp) == '#') {
+      fscanf(fp, "%*[^\n]"); // read and discard line 
   }
-  ungetc(c, fp);
-  
+
   // Read the next three int values
-  fscanf(fp, "%d%d%d\n", &image->cols, &image->rows, &colorSize);
+  fscanf(fp, " %d %d", &columns, &rows);
+  fscanf(fp, " %d", &colorSize);
+  printf("Cols: %d\n", columns);
+  printf("Rows: %d\n", rows);
+  printf("Color size: %d\n", colorSize);
   if (colorSize != 255) { // It must always equal 255
     printf("The value for colors must be 255.\n");
     exit(1);
   }
 
-  image->data = (Pixel *)malloc(image->cols * image->rows * sizeof(Pixel)); // array to hold rgb
-  
-  // Read rgb values of pixels then store into an array
-  fread(image->data, sizeof(Pixel), image->cols * image->rows * 3, fp); 
+  image->cols = columns;
+  image->rows = rows;
+  printf("This \n");
+  image->data = (Pixel *)malloc(columns * rows * sizeof(Pixel)); // array to hold rgb
+  printf("That \n");
 
-  fclose(fp);
-  // free mallocs in main?
-  return image;  //TO DO: replace this stub
+  // Read rgb values of pixels then store into an array
+  fread(image->data, sizeof(Pixel), image->cols * image->rows, fp); 
   
+  // free mallocs in main
+  return image;
 }
 
 
@@ -91,12 +90,23 @@ int write_ppm(FILE *fp, const Image *im) {
   return num_pixels_written;
 }
 
-int main() {
-  FILE* image = fopen("data/building.ppm", "rb");
-  Image *img = read_ppm(image);
-  FILE *im2 = fopen("test.ppm", "wb");
-  write_ppm(im2, img);
-  fclose(image);
-  fclose(im2);
-  return 0;
-}
+// Test reading and writing ppm
+//int main() {
+//  FILE* image = fopen("data/building.ppm", "rb");
+//  printf("1 \n");
+//  Image *img = read_ppm(image);
+//  printf("2 \n");
+//  FILE *im2 = fopen("test.ppm", "wb");
+//  printf("3 \n");
+//  write_ppm(im2, img);
+//  printf("4 \n");
+//  fclose(image);
+//  printf("5 \n");
+//  fclose(im2);
+//  printf("6 \n");
+//  free(img->data);
+//  printf("7 \n");
+//  free(img);
+//  printf("8 \n");
+//  return 0;
+//}
