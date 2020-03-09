@@ -44,7 +44,6 @@ Image * read_ppm(FILE *fp) {
    // Read the next three int values
    fscanf(fp, " %d %d", &columns, &rows);
    fscanf(fp, " %d", &colorSize);
-   printf("Color size: %d\n", colorSize);
    if (colorSize != 255) { // It must always equal 255
      printf("The value for colors must be 255.\n");
      exit(1);
