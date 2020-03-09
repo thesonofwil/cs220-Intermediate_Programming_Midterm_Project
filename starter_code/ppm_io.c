@@ -44,8 +44,6 @@ Image * read_ppm(FILE *fp) {
    // Read the next three int values
    fscanf(fp, " %d %d", &columns, &rows);
    fscanf(fp, " %d", &colorSize);
-   printf("Cols: %d\n", columns);
-   printf("Rows: %d\n", rows);
    printf("Color size: %d\n", colorSize);
    if (colorSize != 255) { // It must always equal 255
      printf("The value for colors must be 255.\n");
@@ -54,9 +52,7 @@ Image * read_ppm(FILE *fp) {
    
    image->cols = columns;
    image->rows = rows;
-   printf("This \n");
    image->data = (Pixel *)malloc(columns * rows * sizeof(Pixel)); // array to hold rgb
-   printf("That \n");
    
    // Read rgb values of pixels then store into an array
    fread(image->data, sizeof(Pixel), image->cols * image->rows, fp);
