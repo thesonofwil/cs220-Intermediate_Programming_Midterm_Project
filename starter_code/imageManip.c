@@ -13,6 +13,7 @@
 // write a function that loops through image and returns each pixel
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "ppm_io.c"
 #include "ppm_io.h"
 
@@ -21,9 +22,16 @@
 // struct image deinfed in header file
 
 // Loops through an image and returns a list of rgb values separately 
-int get_pixel(FILE* image, int x, int y) {
-  
-}
+int main() {
+  FILE *input = fopen("data/building.ppm", "rb");
+  Image *img = read_ppm(input);
 
-// Shift the exposure of the image by a factor of val
-void change_exposure(Image *img, float val) {
+  FILE *output = fopen("building_test.ppm", "wb");
+  write_ppm(output, img);
+
+  fclose(input);
+  fclose(output);
+  free(img->data);
+  free(img);
+  return 0;
+}
