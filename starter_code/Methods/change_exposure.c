@@ -12,34 +12,40 @@
 
 // Shift the exposure of the image by a factor of val
 void change_exposure(Image *img, float val) {
-  
-  // pixel values can't be < 0 or > 255
+  int factor = pow(2.0, val);
+
+  // Multiply rgb values by factor 
+  // Pixel values can't be < 0 or > 255, so set
+  // to 255 if either happens.
+  // Note: int * unsigned char yields an int
   for (int i = 0; i <= img->rows * img->cols; i++) {
-    img->data[i].r = img->data[i].r * (pow(2.0, val));
-    img->data[i].g = img->data[i].g * (pow(2.0, val));
-    img->data[i].b = img->data[i].b * (pow(2.0, val));
-
-    // Set max value 
-    if (img->data[i].r > 255) {
+    if (img->data[i].r * factor > 255 || img->data[i].r * factor < 0) {
       img->data[i].r = 255;
-    }
-    
-    if (img->data[i].g > 255) {
-      img->data[i].g = 255;
+    } else {
+      img->data[i].r = img->data[i].r * factor;
     }
 
-    if (img->data[i].b > 255) {
+    if (img->data[i].g * factor > 255 || img->data[i].g * factor < 0) {
+      img->data[i].g = 255;
+    } else {
+      img->data[i].g = img->data[i].g * factor;
+    }
+
+    if (img->data[i].b * factor > 255 || img->data[i].b * factor < 0) {
       img->data[i].b = 255;
+    } else {
+      img->data[i].b = img->data[i].b * factor;
     }
   }
 }
- 
+
+// Test change_exposure() 
 int main() {
   FILE *input = fopen("building.ppm", "rb");
   Image *img = read_ppm(input);
 
-  FILE *output = fopen("building_exposure.ppm", "wb");
-  change_exposure(img, 1);
+  FILE *output = fopen("building_test.ppm", "wb");
+  change_exposure(img, 2);
   write_ppm(output, img);
 
   fclose(input);
