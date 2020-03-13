@@ -12,6 +12,11 @@
 
 // Shift the exposure of the image by a factor of val
 void change_exposure(Image *img, float val) {
+  if (val < -3 || val > 3) {
+    printf("EV value is out of range");
+    exit(6);
+  }
+
   int factor = pow(2.0, val);
 
   // Multiply rgb values by factor 
