@@ -57,12 +57,13 @@ Image * pad_copy(Image *imgCopy, int dimensions) {
   for (int i = beginningRow; i <= endRow; i++) {
     int c = 0;
     for (int j = begginingCol; j <= endCol; j++) { 
-      padded2DCopy[i][j] = imgCopy[i][j];
+      padded2DCopy[i][j] = imgCopy[r][c];
       c++;
     }
     r++;
   }
-  
+
+  free(paddedCopy->data);
   free(paddedCopy);
   return padded2DCopy;
 }
@@ -112,25 +113,32 @@ double **create_filter(double sigma) {
 }
 
 // Returns a matrix of data of centered at a target pixel
-// Pass in copy of image with 2D data, and current row and column
+// Pass in original image
 // get_pixels(&img[i][j], sigma)
 int **get_pixels(Image *img, int row, int col, double sigma) {
-  //Image *copy = copy_to_2D(img);
+  Image *copy = copy_to_2D(img);
   int dimensions = dimensions(sigma);
   //int index = currentRow * totalCols + currentCol; // index for a fake 2D array
 
   // Pad the image
+  Image *paddedCopy = pad_copy(copy);
   
   int **pixels = (int **)malloc(dimensions * sizeof(int *)); // 2D matrix to hold pixel values
   for (int i = 0; i < dim; i++) {
     pixels[i] = (int *)malloc(dimensions * sizeof(int));
   }
 
+  // Get the pixel values. Beyond edges the values are zeros.
   for (int r = row - dimensions/2; r <= row + dimensions/2; r++) {
     for (int c = col - dimensions/2; c <= dimensions + dimensions/2; c++) {
-      pixels[r][c] = img->data[r][c];
+      pixels[r][c] = paddedCopy->data[r][c];
     }
   }
+
+  free(paddedCopy->data);
+  free(paddedCopy);
+  free(copy);
+  
   return pixels;
 }
 
