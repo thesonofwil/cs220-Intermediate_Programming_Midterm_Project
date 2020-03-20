@@ -15,57 +15,65 @@ double gauss_distribute(double sigma, int dx, int dy) {
 }
 
 // Returns a copy of an image with the data stored as a 2D array
-Image * copy_to_2D(Image *img) {
-  int rows = img->rows;
-  int cols = img->cols;
-  int size = sizeof(img->data)/sizeof(int);
-  Image copy = (Image *)malloc(sizeof(Image));
-  copy->data[rows][cols]; // Dimensions are already known
+//Image * copy_to_2D(Image *img) {
+//  int rows = img->rows;
+//  int cols = img->cols;
+//  int size = sizeof(img->data)/sizeof(int);
+//  Image copy = (Image *)malloc(sizeof(Image));
+//  copy->data[rows][cols]; // Dimensions are already known
   
-  copy->rows = rows;
-  copy->cols = cols;
+//  copy->rows = rows;
+//  copy->cols = cols;
 
-  int index = 0;
-  for (int i = 0; i < rows; i++) {
-    for (int j = 0; j < cols && index < size; j++) {
-      copy->data[i][j] = img->data[index++];
-    }
-  }
-  return copy;
-}
+//  int index = 0;
+//  for (int i = 0; i < rows; i++) {
+//    for (int j = 0; j < cols && index < size; j++) {
+//      copy->data[i][j] = img->data[index++];
+//    }
+//  }
+//  return copy;
+//}
 
-// Creates a copy of the image with 0's at edge cases
-// Pass in copy of image with 2D array
-Image * pad_copy(Image *imgCopy, int dimensions) {
+// Creates a copy of the image with 0's past edge cases
+// Pass in original image and sigma 
+Image * pad_copy(Image *img, double sigma) {
+  int dimensions = dimensions(sigma);
   Image paddedCopy = (Image *)malloc(sizeof(Image));
-  int rows = imgCopy->rows + (dimensions - 1);
-  int cols = imgCopy->cols + (dimensions - 1);
+  int rows = img->rows + (dimensions - 1); // extra rows before first row and after last row
+  int cols = img->cols + (dimensions - 1); // extra cols before first col and after last col
   paddedCopy->rows = rows;
   paddedCopy->cols = cols;
-  paddedCopy->data = (Pixel *)calloc(rows * cols, sizeof(Pixel)); // Initialize everythign to 0
-
-  // Convert to 2D copy
-  Image *padded2DCopy = copy_to_2D(paddedCopy);
+  paddedCopy->data = (Pixel *)calloc(rows * cols, sizeof(Pixel)); // Initialize everything to 0
   
-  int beginningRow = rows - (dimensions - 1) - img->rows; // start of image
-  int beginningCol = cols - (dimensions - 1) - img->cols;
-  int endRow = rows - (dimensions - 1); // end of image
-  int endCol = cols - (dimensions - 1);
+  // Convert to 2D copy
+  //Image *padded2DCopy = copy_to_2D(paddedCopy);
+  
+  //int beginningRow = rows - (dimensions/2 - 1) - img->rows; // start of image
+  //int beginningCol = cols - (dimensions/2 - 1) - img->cols;
+  //int endRow = rows - (dimensions/2 - 1); // end of image
+  //int endCol = cols - (dimensions/2 - 1);
 
+  //int start = cols * dimensions/2 + dimensions/2 - 1;
   // Iterate over original image and copy over to padded copy
-  int r = 0;
-  for (int i = beginningRow; i <= endRow; i++) {
-    int c = 0;
-    for (int j = begginingCol; j <= endCol; j++) { 
-      padded2DCopy[i][j] = imgCopy[r][c];
-      c++;
+  int index = 0;
+  for (int i = dimensions/2; i < dimensions + dimensions/2; i++) {
+    for (int j = dimensions/2; j < dimensions + dimensions/2; j++) {
+      paddedCopy[i * cols + j] = img[index];
+      index++;
     }
-    r++;
   }
+  
+  //int r = 0;
+  // for (int i = beginningRow; i <= endRow; i++) {
+  //  int c = 0;
+  //  for (int j = beginningCol; j <= endCol; j++) { 
+  //    padded2DCopy[i][j] = imgCopy[r][c];
+  //    c++;
+  //  }
+  //  r++;
+  //}
 
-  free(paddedCopy->data);
-  free(paddedCopy);
-  return padded2DCopy;
+  return paddedCopy;
 }
 
 // Return the dimensions of the Gaussian filter (square matrix)
@@ -112,42 +120,78 @@ double **create_filter(double sigma) {
   return filter;
 }
 
-// Returns a matrix of data of centered at a target pixel
-// Pass in original image
-// get_pixels(&img[i][j], sigma)
-int **get_pixels(Image *img, int row, int col, double sigma) {
-  Image *copy = copy_to_2D(img);
-  int dimensions = dimensions(sigma);
-  //int index = currentRow * totalCols + currentCol; // index for a fake 2D array
+// Return the current row in the array given an index
+int get_current_row(int i, int cols) {
+  return i / cols;
+}
 
-  // Pad the image
-  Image *paddedCopy = pad_copy(copy);
+// Return the current colun in the array given an index
+int get_current_column(int i, int cols) {
+  return i % cols;
+}
+
+// Given the 2D index of a pixel from an image, return the corresponding index when
+// the image is made into a padded copy.
+// Pass in index, the current index in the non-padded image
+int get_padded_index(double sigma, int cols, int index) {
+  int dim = dimensions(sigma);
+  int r = get_current_row(index, cols);
+  int c = get_current_column(index, cols);
+  int paddedIndex = (dim/2) * cols + (r * cols) + (dim/2) + c;
+  return paddedIndex;
+}
+
+// Returns a matrix of data of centered at a target pixel
+// Pass in image and target pixel
+// get_pixels(&img[i][j], sigma)
+Image *get_pixels(Image *img, double sigma, int index) {
+  int dimensions = dimensions(sigma);
+  Image pixels = (Image *)malloc(sizeof(Image));
+  pixels->rows = dimensions;
+  pixels->cols = dimensions;
+  pixels->data = (Pixel *)malloc(pixels->rows * pixels->cols * sizeof(Pixel));
+
+  Image paddedCopy = pad_copy(img, sigma);
+  //int index = currentRow * totalCols + currentCol; // index for a fake 2D array
   
-  int **pixels = (int **)malloc(dimensions * sizeof(int *)); // 2D matrix to hold pixel values
-  for (int i = 0; i < dim; i++) {
-    pixels[i] = (int *)malloc(dimensions * sizeof(int));
-  }
+  //int **pixels = (int **)malloc(dimensions * sizeof(int *)); // 2D matrix to hold pixel values
+  //for (int i = 0; i < dim; i++) {
+  //  pixels[i] = (int *)malloc(dimensions * sizeof(int));
+  //}
 
   // Get the pixel values. Beyond edges the values are zeros.
-  for (int r = row - dimensions/2; r <= row + dimensions/2; r++) {
-    for (int c = col - dimensions/2; c <= dimensions + dimensions/2; c++) {
-      pixels[r][c] = paddedCopy->data[r][c];
-    }
-  }
+  //for (int r = row - dimensions/2; r <= row + dimensions/2; r++) {
+  //  for (int c = col - dimensions/2; c <= dimensions + dimensions/2; c++) {
+  //    pixels[r][c] = paddedCopy->data[r][c];
+  //  }
+  //}
 
-  free(paddedCopy->data);
-  free(paddedCopy);
-  free(copy);
+  // Target pixel is at the center
+  int center = get_padded_index(sigma, pixels->cols, index);
+  int start = center - (2 * pixels->cols) - dimensions / 2; // Beginning padded index
+  int end = center + (2 * pixels->cols) + dimensions / 2; // Ending padded index
+
+  // How to skip when out of bounds?
+  int i = 0;
+  for (int paddedIndex = start; paddedIndex <= end; paddedIndex++) {
+    pixels->data[i] = paddedCopy->data[paddedIndex];
+    i++;
+  }
   
   return pixels;
 }
 
 // Multiply pixel and its surroundings with the filter
 // To call: convolve(&img[i][j], &filter[i][j]);
-void convolve(Image *img, double filterValue) {
-  img->data.r * filterValue;
-  img->data.g * filterValue;
-  img->data.b * filterValue;
+void convolve(Image *img, double *filter, double sigma) {
+  int **pixels = get_pixels(img);
+  int dimensions = dimensions(sigma);
+
+  for (int r = 0; r <= dimensions; r++) {
+    for (int c = 0; c <= dimensions; c++) {
+      pixels[r][c] * filter;
+      // img->data.g * filter;
+      //img->data.b * filter;
 }
 
 void convolve_all(Image *img, double **filter) {
