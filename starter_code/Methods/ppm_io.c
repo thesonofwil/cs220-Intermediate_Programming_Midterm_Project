@@ -1,4 +1,4 @@
-// Anire Egbe, Wilson Tjoengqw
+// Anire Egbe, Wilson Tjoeng
 // , wtjoeng1
 
 // ppm_io.c
