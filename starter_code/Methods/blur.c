@@ -34,11 +34,11 @@ double gauss_distribute(double sigma, int dx, int dy) {
 //  return copy;
 //}
 
-// Creates a copy of the image with 0's past edge cases
+// Creates a copy of the image with 0's past edges
 // Pass in original image and sigma 
 Image * pad_copy(Image *img, double sigma) {
   int dimensions = dimensions(sigma);
-  Image paddedCopy = (Image *)malloc(sizeof(Image));
+  Image *paddedCopy = (Image *)malloc(sizeof(Image));
   int rows = img->rows + (dimensions - 1); // extra rows before first row and after last row
   int cols = img->cols + (dimensions - 1); // extra cols before first col and after last col
   paddedCopy->rows = rows;
@@ -92,9 +92,9 @@ int dimensions(double sigma) {
   return dim;
 }
 
-// Return the Gaussian filter matrix
-double **create_filter(double sigma) {
-  double dx, dy;
+// Return the Gaussian filter matrix in 1D format
+double *create_filter(double sigma) {
+  double dx, dy; // The displacements from the center
   int dim = dimensions(sigma); // dimensions of square filter matrix
   
   // Bounds of matrix
@@ -102,19 +102,18 @@ double **create_filter(double sigma) {
   int upperBound = -1 * lowerBound;
   
   // Create square filter matrix
-  double **filter = (double **)malloc(dim * sizeof(double *));
-  for (int i = 0; i < dim; i++) {
-    filter[i] = (double *)malloc(dim * sizeof(double));
-  }
+  double *filter = (double *)malloc(sq(dim) * sizeof(double));
 
   // Generate values for filter matrix
   // dx and dy are the coordinates of an entry in the matrix
   // Note indexing starts at 0 in C
+  int index = 0;
   for (int r = lowerBound; r <= upperBound; r++) {
     dy = r;
     for (int c = lowerBound; c <= upperBound; c++) {
       dx = c;
-      filter[r + upperBound][c + upperBound] = gauss_distribute(sigma, dx, dy);
+      filter[index] = gauss_distribute(sigma, dx, dy);
+      index++;
     }
   }
   return filter;
@@ -132,12 +131,12 @@ int get_current_column(int i, int cols) {
 
 // Given the 2D index of a pixel from an image, return the corresponding index when
 // the image is made into a padded copy.
-// Pass in index, the current index in the non-padded image
-int get_padded_index(double sigma, int cols, int index) {
-  int dim = dimensions(sigma);
-  int r = get_current_row(index, cols);
-  int c = get_current_column(index, cols);
-  int paddedIndex = (dim/2) * cols + (r * cols) + (dim/2) + c;
+// Pass in total number of columns in padded copy and the current index in the non-padded image
+int get_padded_index(double sigma, int paddedCols, int originalIndex) {
+  int dim = dimensions(sigma); // Dimensions of filter 
+  int r = get_current_row(originalIndex, paddedCols);
+  int c = get_current_column(originalIndex, paddedCols);
+  int paddedIndex = (dim/2) * paddedCols + (r * paddedCols) + (dim/2) + c;
   return paddedIndex;
 }
 
@@ -145,61 +144,92 @@ int get_padded_index(double sigma, int cols, int index) {
 // Pass in image and target pixel
 // get_pixels(&img[i][j], sigma)
 Image *get_pixels(Image *img, double sigma, int index) {
-  int dimensions = dimensions(sigma);
-  Image pixels = (Image *)malloc(sizeof(Image));
+  int dimensions = dimensions(sigma); // Same dimensions as filter
+  Image *pixels = (Image *)malloc(sizeof(Image));
   pixels->rows = dimensions;
   pixels->cols = dimensions;
   pixels->data = (Pixel *)malloc(pixels->rows * pixels->cols * sizeof(Pixel));
 
-  Image paddedCopy = pad_copy(img, sigma);
-  //int index = currentRow * totalCols + currentCol; // index for a fake 2D array
-  
-  //int **pixels = (int **)malloc(dimensions * sizeof(int *)); // 2D matrix to hold pixel values
-  //for (int i = 0; i < dim; i++) {
-  //  pixels[i] = (int *)malloc(dimensions * sizeof(int));
-  //}
+  Image *paddedCopy = pad_copy(img, sigma);
+ 
+  // Define the indices of the pixels to be copied from the padded copy
+  int center = get_padded_index(sigma, pixels->cols, index); // Target pixel is at the center
+  int start = center - (2 * paddedCopy->cols) - dimensions / 2; // Beginning padded index
+  int end = center + (2 * paddedCopy->cols) + dimensions / 2; // Ending padded index
 
-  // Get the pixel values. Beyond edges the values are zeros.
-  //for (int r = row - dimensions/2; r <= row + dimensions/2; r++) {
-  //  for (int c = col - dimensions/2; c <= dimensions + dimensions/2; c++) {
-  //    pixels[r][c] = paddedCopy->data[r][c];
-  //  }
-  //}
-
-  // Target pixel is at the center
-  int center = get_padded_index(sigma, pixels->cols, index);
-  int start = center - (2 * pixels->cols) - dimensions / 2; // Beginning padded index
-  int end = center + (2 * pixels->cols) + dimensions / 2; // Ending padded index
-
-  // How to skip when out of bounds?
+  // Copy over pixel data from padded copy, centering the target and obtaining neighbors
   int i = 0;
+  int count = 0; // Keep track of when index goes past filter
   for (int paddedIndex = start; paddedIndex <= end; paddedIndex++) {
+    if (count == dimensions) {
+      count = 0; // reset count
+      paddedIndex += paddedCopy->cols - dimensions;
+    }
     pixels->data[i] = paddedCopy->data[paddedIndex];
     i++;
+    count++;
   }
-  
+
+  free(paddedCopy->data);
+  free(paddedCopy);
   return pixels;
 }
 
-// Multiply pixel and its surroundings with the filter
+// Multiply pixel values by the filter values and return the new pixel value
+// Pass in unmodified original image, a copy of the image to be modified, Gaussian filter, and index of pixel to be changed in image
 // To call: convolve(&img[i][j], &filter[i][j]);
-void convolve(Image *img, double *filter, double sigma) {
-  int **pixels = get_pixels(img);
-  int dimensions = dimensions(sigma);
+void convolve(Image *originalImage, Image *output, double *filter, double sigma, int targetIndex) {
+  Image *pixels = get_pixels(originalImage, sigma, targetIndex);
+  int dim = dimensions(sigma); // Get dimensions of filter
 
-  for (int r = 0; r <= dimensions; r++) {
-    for (int c = 0; c <= dimensions; c++) {
-      pixels[r][c] * filter;
-      // img->data.g * filter;
-      //img->data.b * filter;
+  // Get index of target pixel
+  int paddedIndex = get_padded_index(sigma, originalImage->cols + dim - 1, targetIndex);
+  int a = get_current_row(paddedIndex, originalImage->rows + dim/2 - 1);
+  int b = get_current_column(targetIndex,originalImage->cols + dim/2 - 1);
+
+  double sumFilter = 0;
+  double sumR = 0;
+  double sumG = 0;
+  double sumB = 0;
+ 
+  int index = 0;
+
+  // Boundaries defined as the starting and ending indices in the padded copy
+  for (int i = a - dim/2; i <= a + dim/2; i++) {
+    for (int j = b - dim/2; j <= b + dim/2; j++) {
+      pixels->data[index].r = pixels->data[index].r * filter[index];
+      pixels->data[index].g = pixels->data[index].g * filter[index];
+      pixels->data[index].b = pixels->data[index].b * filter[index];
+      sumR += pixels->data[index].r;
+      sumG += pixels->data[index].g;
+      sumB += pixels->data[index].b;
+      
+      // If within boundaries, add up sum for normalization
+      if !(i < dim/2 || i > dim/2 + img->rows - 1 || j < dim/2 || j > dim/2 + img->cols - 1) {
+        sumFilter += filter[index];
+      }
+      index++;
+    }
+  }
+  output->data.r[targetIndex] = sumR/sumFilter;
+  output->data.g[targetIndex] = sumG/sumFilter;
+  output->data.b[targetIndex] = sumB/sumFilter;
+
+  free(pixels->data);
+  free(pixels);
 }
 
-void convolve_all(Image *img, double **filter) {
- 
+void convolve_all(Image *originalImage, Image *output, double *filter, double sigma) {
+  for (int i = 0; i < originalImage->rows * originalImage->cols; i++) {
+    convolve(originalImage, output, filter, sigma, i);
+  }
+}
+
+void driver() {
 }
 
 int main(void) {
-  double **matrix = create_filter(0.5);
+  double *matrix = create_filter(0.5);
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 5; j++) {
       printf("%f ", matrix[i][j]);
