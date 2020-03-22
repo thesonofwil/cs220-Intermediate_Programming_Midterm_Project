@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Return a copy of the parameter squared
+double sq(double *x) {
+  return x * x;
+}
+
+// Return the Gaussian filter matrix
+double **gauss_distribute(double sigma, double dx, double dy) {
+  double g = (1.0 / (2.0 * PI * sq(sigma))) * exp(-(sq(dx) + sq(dy)) / (2 * sq(sigma)));
+  int dim;
+  if ((10 * sigma) % 2 == 0) {
+  }
+  
+  double **filter = (double **)malloc(
+}
+
+int main(void) {
+}
