@@ -14,6 +14,22 @@ double gauss_distribute(double sigma, int dx, int dy) {
   return (1.0 / (2.0 * pi * sq(sigma))) * exp(-(sq(dx) + sq(dy)) / (2 * sq(sigma)));
 }
 
+int dimensions(double sigma) {
+  int dim;
+  
+  // Matrix dimensions must be at least 10 * sigma and odd
+  if (fmod(10 * sigma, 2) == 0) {
+    dim = 10 * sigma + 1; // even - add an extra dimension
+  } else {
+    dim = 10 * sigma; // odd - keep as is
+    if (dim < 10 * sigma) { // account for more than one decimal places
+      dim += 2;
+    }
+  }
+  return dim;
+}
+
+
 // Returns a copy of an image with the data stored as a 2D array
 //Image * copy_to_2D(Image *img) {
 //  int rows = img->rows;
@@ -37,10 +53,10 @@ double gauss_distribute(double sigma, int dx, int dy) {
 // Creates a copy of the image with 0's past edges
 // Pass in original image and sigma 
 Image * pad_copy(Image *img, double sigma) {
-  int dimensions = dimensions(sigma);
+  int dim = dimensions(sigma);
   Image *paddedCopy = (Image *)malloc(sizeof(Image));
-  int rows = img->rows + (dimensions - 1); // extra rows before first row and after last row
-  int cols = img->cols + (dimensions - 1); // extra cols before first col and after last col
+  int rows = img->rows + (dim - 1); // extra rows before first row and after last row
+  int cols = img->cols + (dim - 1); // extra cols before first col and after last col
   paddedCopy->rows = rows;
   paddedCopy->cols = cols;
   paddedCopy->data = (Pixel *)calloc(rows * cols, sizeof(Pixel)); // Initialize everything to 0
@@ -56,8 +72,8 @@ Image * pad_copy(Image *img, double sigma) {
   //int start = cols * dimensions/2 + dimensions/2 - 1;
   // Iterate over original image and copy over to padded copy
   int index = 0;
-  for (int i = dimensions/2; i < dimensions + dimensions/2; i++) {
-    for (int j = dimensions/2; j < dimensions + dimensions/2; j++) {
+  for (int i = dim/2; i < dim + dim/2; i++) {
+    for (int j = dim/2; j < dim + dim/2; j++) {
       paddedCopy[i * cols + j] = img[index];
       index++;
     }
@@ -74,22 +90,6 @@ Image * pad_copy(Image *img, double sigma) {
   //}
 
   return paddedCopy;
-}
-
-// Return the dimensions of the Gaussian filter (square matrix)
-int dimensions(double sigma) {
-  int dim;
-  
-  // Matrix dimensions must be at least 10 * sigma and odd
-  if (fmod(10 * sigma, 2) == 0) {
-    dim = 10 * sigma + 1; // even - add an extra dimension
-  } else {
-    dim = 10 * sigma; // odd - keep as is
-    if (dim < 10 * sigma) { // account for more than one decimal places
-      dim += 2;
-    }
-  }
-  return dim;
 }
 
 // Return the Gaussian filter matrix in 1D format
@@ -144,26 +144,26 @@ int get_padded_index(double sigma, int paddedCols, int originalIndex) {
 // Pass in image and target pixel
 // get_pixels(&img[i][j], sigma)
 Image *get_pixels(Image *img, double sigma, int index) {
-  int dimensions = dimensions(sigma); // Same dimensions as filter
+  int dim = dimensions(sigma); // Same dimensions as filter
   Image *pixels = (Image *)malloc(sizeof(Image));
-  pixels->rows = dimensions;
-  pixels->cols = dimensions;
+  pixels->rows = dim;
+  pixels->cols = dim;
   pixels->data = (Pixel *)malloc(pixels->rows * pixels->cols * sizeof(Pixel));
 
   Image *paddedCopy = pad_copy(img, sigma);
  
   // Define the indices of the pixels to be copied from the padded copy
   int center = get_padded_index(sigma, pixels->cols, index); // Target pixel is at the center
-  int start = center - (2 * paddedCopy->cols) - dimensions / 2; // Beginning padded index
-  int end = center + (2 * paddedCopy->cols) + dimensions / 2; // Ending padded index
+  int start = center - (2 * paddedCopy->cols) - dim / 2; // Beginning padded index
+  int end = center + (2 * paddedCopy->cols) + dim / 2; // Ending padded index
 
   // Copy over pixel data from padded copy, centering the target and obtaining neighbors
   int i = 0;
   int count = 0; // Keep track of when index goes past filter
   for (int paddedIndex = start; paddedIndex <= end; paddedIndex++) {
-    if (count == dimensions) {
+    if (count == dim) {
       count = 0; // reset count
-      paddedIndex += paddedCopy->cols - dimensions;
+      paddedIndex += paddedCopy->cols - dim;
     }
     pixels->data[i] = paddedCopy->data[paddedIndex];
     i++;
@@ -205,15 +205,15 @@ void convolve(Image *originalImage, Image *output, double *filter, double sigma,
       sumB += pixels->data[index].b;
       
       // If within boundaries, add up sum for normalization
-      if !(i < dim/2 || i > dim/2 + img->rows - 1 || j < dim/2 || j > dim/2 + img->cols - 1) {
+      if (!(i < dim/2 || i > dim/2 + originalImage->rows - 1 || j < dim/2 || j > dim/2 + originalImage->cols - 1)) {
         sumFilter += filter[index];
       }
       index++;
     }
   }
-  output->data.r[targetIndex] = sumR/sumFilter;
-  output->data.g[targetIndex] = sumG/sumFilter;
-  output->data.b[targetIndex] = sumB/sumFilter;
+  output->data[targetIndex].r = sumR/sumFilter;
+  output->data[targetIndex].g = sumG/sumFilter;
+  output->data[targetIndex].b = sumB/sumFilter;
 
   free(pixels->data);
   free(pixels);
@@ -225,16 +225,26 @@ void convolve_all(Image *originalImage, Image *output, double *filter, double si
   }
 }
 
-void driver() {
+void driver(FILE *input, double sigma) {
+  Image *copyOfOriginalImg = read_ppm(input);
+  Image *imgToBeBlurred = read_ppm(input);
+  FILE *output = fopen("building_blur.ppm", "wb");
+
+  double *gaussianFilter = create_filter(sigma);
+  convolve_all(copyOfOriginalImg, imgToBeBlurred, gaussianFilter, sigma);
+  write_ppm(output, imgToBeBlurred);
+
+  free(copyOfOriginalImg->data);
+  free(copyOfOriginalImg);
+  free(imgToBeBlurred->data);
+  free(imgToBeBlurred);
+  fclose(output);
 }
 
 int main(void) {
-  double *matrix = create_filter(0.5);
-  for (int i = 0; i < 5; i++) {
-    for (int j = 0; j < 5; j++) {
-      printf("%f ", matrix[i][j]);
-    }
-    printf("\n");
-  }
-  free(matrix);
+  double sigma = 5;
+  
+  FILE *input = fopen("building.ppm", "rb");
+  driver(input, sigma);
+  return 0;
 }
