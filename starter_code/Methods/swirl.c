@@ -1,4 +1,4 @@
-q#include <stdio.h>
+
 #include <stdlib.h>
 #include "ppm_io.c"
 #include "ppm_io.h"
