@@ -10,7 +10,7 @@ double sq(double x) {
 }
 
 double gauss_distribute(double sigma, int dx, int dy) {
-  const double pi = 3.14159265;
+  const double pi = 3.1415926535897932;
   return (1.0 / (2.0 * pi * sq(sigma))) * exp(-(sq(dx) + sq(dy)) / (2 * sq(sigma)));
 }
 
@@ -40,13 +40,6 @@ Image *pad_copy(Image *img, double sigma) {
   paddedCopy->cols = cols;
   paddedCopy->data = (Pixel *)calloc(rows * cols, sizeof(Pixel)); // Initialize everything to 0
   //paddedCopy->data = (Pixel *)malloc(rows * cols * sizeof(Pixel));
-
-  // Set everything to 0
-  //for (int i = 0; i < rows * cols; i++) {
-  //  paddedCopy->data[i].r = 0;
-  //  paddedCopy->data[i].g = 0;
-  //  paddedCopy->data[i].b = 0;
-  //}
   
   // Copy image within border of zeros
   int index = 0;
@@ -112,8 +105,6 @@ int get_padded_index(double sigma, int colsInOriginal, int originalIndex) {
 }
 
 // Returns a matrix of data of centered at a target pixel
-// Pass in image and target pixel
-// get_pixels(&img[i][j], sigma)
 Image *get_pixels(Image *img, Image *paddedCopy, double sigma, int index) {
   int dim = dimensions(sigma); // Same dimensions as filter
   Image *pixels = (Image *)malloc(sizeof(Image));
@@ -123,130 +114,101 @@ Image *get_pixels(Image *img, Image *paddedCopy, double sigma, int index) {
 
   // Define the indices of the pixels to be copied from the padded copy
   int center = get_padded_index(sigma, img->cols, index); // Target pixel is at the center
-  int start = center - (2 * paddedCopy->cols) - dim / 2; // Beginning padded index
-  int end = center + (2 * paddedCopy->cols) + dim / 2; // Ending padded index
-
-  // Copy over pixel data from padded copy, centering the target and obtaining neighbors
-  int i = 0;
-  int count = 0; // Keep track of when index goes past filter
-  for (int paddedIndex = start; paddedIndex <= end; paddedIndex++) {
-    if (count == dim) {
-      count = 0; // reset count
-      paddedIndex += paddedCopy->cols - dim;
-    }
-    pixels->data[i] = paddedCopy->data[paddedIndex];
-    i++;
-    count++;
-  }
+  int x = get_current_row(center, paddedCopy->cols); // Row where center is at in padded copy
+  int y = get_current_column(center, paddedCopy->cols); // Column where center is at in padded copy
   
+  // Copy over pixel data from padded copy, centering the target and obtaining neighbors
+  int count = 0; // Keep track of when index goes past filter
+  for (int i = x - dim/2; i <= x + dim/2; i++) {
+    for (int j = y - dim/2; j <= y + dim/2; j++) { 
+      pixels->data[count] = paddedCopy->data[i * paddedCopy->cols + j];
+      count++;
+    }
+  }
   return pixels;
 }
 
 // Multiply pixel values by the filter values and return the new pixel value
 // Pass in unmodified original image, a copy of the image to be modified, Gaussian filter, and index of pixel to be changed in image
-// To call: convolve(&img[i][j], &filter[i][j]);
 void convolve(Image *originalImage, Image *output, Image *paddedCopy, double *filter, double sigma, int targetIndex) {
   Image *pixels = get_pixels(originalImage, paddedCopy, sigma, targetIndex);
   int dim = dimensions(sigma); // Get dimensions of filter
 
   // Get index of target pixel
-  int paddedIndex = get_padded_index(sigma, paddedCopy->cols, targetIndex);
+  int paddedIndex = get_padded_index(sigma, originalImage->cols, targetIndex);
   int x = get_current_row(paddedIndex, paddedCopy->cols); // Current row in padded copy
   int y = get_current_column(paddedIndex, paddedCopy->cols); // Current col in padded copy
 
-  //printf("Padded Copy cols: %d \n", paddedCopy->cols);
-  //printf("Target Index: %d \n", targetIndex);
-  //printf("Padded Index: %d \n", paddedIndex);
-  //printf("x: %d \n", x);
-  //printf("y: %d \n", y);
-  //printf("\n");
-  
   double sumFilter = 0;
   double sumR = 0;
   double sumG = 0;
   double sumB = 0;
  
   int index = 0;
-
+  
   // Boundaries defined as the starting and ending indices in the padded copy
   for (int i = x - dim/2; i <= x + dim/2; i++) {
     for (int j = y - dim/2; j <= y + dim/2; j++) {
-      double r = pixels->data[index].r * filter[index];
-      double g = pixels->data[index].g * filter[index];
-      double b = pixels->data[index].b * filter[index];
-      sumR += r;
-      sumG += g;
-      sumB += b;
+      double red = pixels->data[index].r * filter[index];
+      double green = pixels->data[index].g * filter[index];
+      double blue = pixels->data[index].b * filter[index];
+
+      sumR += red;
+      sumG += green;
+      sumB += blue;
       
       // If within boundaries, add up sum for normalization
-      if ((i > dim/2 && i < dim/2 + originalImage->rows) || (j > dim/2 && j < dim/2 + originalImage->cols)) {
-        sumFilter += filter[index];
+      if ((i > (dim/2 - 1) && i < (dim/2 + originalImage->rows)) && (j > (dim/2 - 1) && j < (dim/2 + originalImage->cols))) {
+     	sumFilter += filter[index];
       }
       index++;
     }
   }
-  
-  //printf("sumR: %f \n", sumR);
-  //printf("sumG: %f \n", sumG);
-  //printf("sumB: %f \n", sumB);
-  //printf("sumFilter: %f \n", sumFilter);
 
   output->data[targetIndex].r = sumR/sumFilter;
   output->data[targetIndex].g = sumG/sumFilter;
   output->data[targetIndex].b = sumB/sumFilter;
-
+  
   free(pixels->data);
   free(pixels);
 }
 
+// Apply the filter to every pixel in the image
 void convolve_all(Image *originalImage, Image *output, double *filter, double sigma) {
   Image *paddedCopy = pad_copy(originalImage, sigma);
-  //FILE *padded_copy = fopen("building_padded.ppm", "wb");
-  //write_ppm(padded_copy, paddedCopy);
-  //Image *pixels = get_pixels(originalImage, paddedCopy, sigma, 5);
-  //FILE *pixelOutput = fopen("pixelsCenteredAt5.ppm", "wb");
-  //write_ppm(pixelOutput, pixels);
-  //free(pixels->data);
-  //free(pixels);
   
   for (int i = 0; i < originalImage->rows * originalImage->cols; i++) {
-    //printf("%d ", i);
-    //if (i % 10000 == 0) {
-    //  printf("%d \n", i);
     convolve(originalImage, output, paddedCopy, filter, sigma, i);
   }
 
-  //fclose(pixelOutput);
   free(paddedCopy->data);
   free(paddedCopy);
 }
 
 void driver(FILE *input, double sigma) {
-  Image *copyOfOriginalImg = read_ppm(input);
+  Image *originalImg = read_ppm(input);
   Image *imgToBeBlurred = read_ppm(input);
-  FILE *output = fopen("building_blur.ppm", "wb");
-  
+  FILE *output = fopen("building_blur-5.ppm", "wb");
+    
   double *gaussianFilter = create_filter(sigma);
-  printf("Convolve all now\n");
-  convolve_all(copyOfOriginalImg, imgToBeBlurred, gaussianFilter, sigma);
-  printf("Done \n");
+  convolve_all(originalImg, imgToBeBlurred, gaussianFilter, sigma);
   write_ppm(output, imgToBeBlurred);
 
   free(gaussianFilter);
-  free(copyOfOriginalImg->data);
-  free(copyOfOriginalImg);
+  free(originalImg->data);
+  free(originalImg);
   free(imgToBeBlurred->data);
   free(imgToBeBlurred);
   fclose(output);
 }
 
 int main(void) {
-  double sigma = 0.5;
+  double sigma = 5;
   assert(sigma > 0);
   
-  FILE *input = fopen("building.ppm", "rb");
-  
-  driver(input, sigma);
+  FILE *input = fopen("building.ppm", "rb");  
+  driver(input,  sigma);
   fclose(input);
+  
   return 0;
 }
