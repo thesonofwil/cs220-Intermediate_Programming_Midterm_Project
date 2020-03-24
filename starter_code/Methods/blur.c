@@ -64,7 +64,7 @@ double *create_filter(double sigma) {
   int upperBound = -1 * lowerBound;
   
   // Create square filter matrix
-  double *filter = (double *)malloc(sq(dim) * sizeof(double));
+  double *filter = (double *)calloc(sq(dim), sizeof(double));
 
   // Generate values for filter matrix
   // dx and dy are the coordinates of an entry in the matrix
@@ -110,7 +110,7 @@ Image *get_pixels(Image *img, Image *paddedCopy, double sigma, int index) {
   Image *pixels = (Image *)malloc(sizeof(Image));
   pixels->rows = dim;
   pixels->cols = dim;
-  pixels->data = (Pixel *)malloc(pixels->rows * pixels->cols * sizeof(Pixel));
+  pixels->data = (Pixel *)calloc(pixels->rows * pixels->cols, sizeof(Pixel));
 
   // Define the indices of the pixels to be copied from the padded copy
   int center = get_padded_index(sigma, img->cols, index); // Target pixel is at the center

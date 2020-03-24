@@ -53,7 +53,7 @@ Image * read_ppm(FILE *fp) {
    
   image->cols = columns;
   image->rows = rows;
-  image->data = (Pixel *)malloc(columns * rows * sizeof(Pixel)); // array to hold rgb
+  image->data = (Pixel *)calloc(columns * rows, sizeof(Pixel)); // array to hold rgb
    
   // Read rgb values of pixels then store into an array
   fread(image->data, sizeof(Pixel), image->cols * image->rows, fp);
