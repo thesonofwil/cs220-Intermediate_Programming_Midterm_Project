@@ -33,7 +33,7 @@ Image * read_ppm(FILE *fp) {
   fscanf(fp, "%2s \n", type); // read 2 characters into type
   type[2] = '\0';
   if (strcmp(type, "P6") != 0) {
-    printf("Invalid file type.\n");
+    fprintf(stderr, "Error: invalid file type.\n");
     exit(3);
   }
    
