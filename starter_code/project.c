@@ -1,4 +1,5 @@
-// Wilson Tjoeng
+ure(img, param);
+  71     write_ppm(outpu// Wilson Tjoeng
 // wtjoeng1
 
 // Program to call functions on an image. Return 0 if no errors.
@@ -107,6 +108,7 @@ int main(int argc, char *argv[]) {
 
   fclose(input);
   fclose(output);
+  
   free(img->data);
   free(img);
   free(result->data);
