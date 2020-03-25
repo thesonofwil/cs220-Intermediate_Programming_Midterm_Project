@@ -22,7 +22,8 @@ Image * read_ppm(FILE *fp) {
   assert(fp);
   
   char type[3];
- 
+  char isComment;
+  
   int colorSize;
   int columns, rows;
   
@@ -38,9 +39,13 @@ Image * read_ppm(FILE *fp) {
   }
    
   // Skip comments if any. Assume there is at most one line of comment.
+  isComment = fgetc(fp);
   if (fgetc(fp) == '#') {
     fscanf(fp, "%*[^\n]"); // read and discard line
+  } else {
+    ungetc(isComment, fp); // No comment, undo fgetc
   }
+	  
   
   // Read the next three int values
   // Space after %d to account for newline
