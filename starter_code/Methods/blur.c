@@ -185,7 +185,7 @@ void convolve_all(Image *originalImage, Image *output, double *filter, double si
   free(paddedCopy);
 }
 
-void driver(FILE *input, double sigma) {
+void blur(FILE *input, double sigma) {
   Image *originalImg = read_ppm(input);
   Image *imgToBeBlurred = read_ppm(input);
   FILE *output = fopen("building_blur-5.ppm", "wb");
@@ -207,7 +207,7 @@ int main(void) {
   assert(sigma > 0);
   
   FILE *input = fopen("building.ppm", "rb");  
-  driver(input,  sigma);
+  blur(input,  sigma);
   fclose(input);
   
   return 0;
