@@ -22,6 +22,7 @@ Image * read_ppm(FILE *fp) {
   assert(fp);
   
   char type[3];
+  char isComment;
  
   int colorSize;
   int columns, rows;
@@ -38,8 +39,11 @@ Image * read_ppm(FILE *fp) {
   }
    
   // Skip comments if any. Assume there is at most one line of comment.
-  if (fgetc(fp) == '#') {
+  isComment = fgetc(fp);
+  if (isComment == '#') {
     fscanf(fp, "%*[^\n]"); // read and discard line
+  } else {
+    ungetc(isComment, fp); // No comment, undo fgetc
   }
   
   // Read the next three int values
@@ -57,8 +61,7 @@ Image * read_ppm(FILE *fp) {
    
   // Read rgb values of pixels then store into an array
   fread(image->data, sizeof(Pixel), image->cols * image->rows, fp);
-  
-  
+   
   // free mallocs in main
   return image;
 }
