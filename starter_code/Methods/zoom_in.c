@@ -46,20 +46,3 @@ Image * zoom_in(Image *img) {
  
   return output;
 }
-
-int main() {
-  FILE *input = fopen("building.ppm", "rb");
-  Image *img = read_ppm(input);
-
-  FILE *output = fopen("building_zoomed_in.ppm", "wb");
-  Image *img_output = zoom_in(img);
-  write_ppm(output, img_output);
-
-  fclose(input);
-  fclose(output);
-  free(img->data);
-  free(img);
-  free(img_output->data);
-  free(img_output);
-  return 0;
-}

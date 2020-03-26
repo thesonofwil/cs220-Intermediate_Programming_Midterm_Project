@@ -185,11 +185,10 @@ void convolve_all(Image *originalImage, Image *output, double *filter, double si
   free(paddedCopy);
 }
 
-void blur(FILE *input, double sigma) {
+void blur(FILE *input, FILE *output, double sigma) {
   Image *originalImg = read_ppm(input);
   Image *imgToBeBlurred = read_ppm(input);
-  FILE *output = fopen("building_blur-5.ppm", "wb");
-    
+     
   double *gaussianFilter = create_filter(sigma);
   convolve_all(originalImg, imgToBeBlurred, gaussianFilter, sigma);
   write_ppm(output, imgToBeBlurred);
@@ -200,15 +199,4 @@ void blur(FILE *input, double sigma) {
   free(imgToBeBlurred->data);
   free(imgToBeBlurred);
   fclose(output);
-}
-
-int main(void) {
-  double sigma = 5;
-  assert(sigma > 0);
-  
-  FILE *input = fopen("building.ppm", "rb");  
-  blur(input,  sigma);
-  fclose(input);
-  
-  return 0;
 }

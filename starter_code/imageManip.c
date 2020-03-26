@@ -21,17 +21,4 @@
 // struct pixel defined in header file
 // struct image deinfed in header file
 
-// Loops through an image and returns a list of rgb values separately 
-int main() {
-  FILE *input = fopen("data/building.ppm", "rb");
-  Image *img = read_ppm(input);
 
-  FILE *output = fopen("building_test.ppm", "wb");
-  write_ppm(output, img);
-
-  fclose(input);
-  fclose(output);
-  free(img->data);
-  free(img);
-  return 0;
-}
