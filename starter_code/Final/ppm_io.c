@@ -23,7 +23,7 @@ Image * read_ppm(FILE *fp) {
   
   char type[3];
   char isComment;
-  
+ 
   int colorSize;
   int columns, rows;
   
@@ -34,18 +34,17 @@ Image * read_ppm(FILE *fp) {
   fscanf(fp, "%2s \n", type); // read 2 characters into type
   type[2] = '\0';
   if (strcmp(type, "P6") != 0) {
-    fprintf(stderr, "Error: invalid file type.\n");
+    printf("Invalid file type.\n");
     exit(3);
   }
    
   // Skip comments if any. Assume there is at most one line of comment.
   isComment = fgetc(fp);
-  if (fgetc(fp) == '#') {
+  if (isComment == '#') {
     fscanf(fp, "%*[^\n]"); // read and discard line
   } else {
     ungetc(isComment, fp); // No comment, undo fgetc
   }
-	  
   
   // Read the next three int values
   // Space after %d to account for newline
@@ -55,15 +54,14 @@ Image * read_ppm(FILE *fp) {
     printf("The value for colors must be 255.\n");
     exit(1);
   }
-   
+
   image->cols = columns;
   image->rows = rows;
   image->data = (Pixel *)calloc(columns * rows, sizeof(Pixel)); // array to hold rgb
    
   // Read rgb values of pixels then store into an array
   fread(image->data, sizeof(Pixel), image->cols * image->rows, fp);
-  
-  
+   
   // free mallocs in main
   return image;
 }

@@ -1,5 +1,4 @@
-ure(img, param);
-  71     write_ppm(outpu// Wilson Tjoeng
+// Wilson Tjoeng
 // wtjoeng1
 
 // Program to call functions on an image. Return 0 if no errors.
@@ -9,6 +8,7 @@ ure(img, param);
 #include <string.h>
 #include "ppm_io.c"
 #include "ppm_io.h"
+#include "change_exposure.h"
 
 // Check if the number of arguments meet what is required for the manipulation
 void check_argc(int argc, int req) {
@@ -30,6 +30,7 @@ float convert_parameter(char *arg) {
 
   return parameter;
 }
+
 
 int main(int argc, char *argv[]) {
   char *inputFile;
@@ -60,7 +61,7 @@ int main(int argc, char *argv[]) {
   }
 
   Image *img = read_ppm(input);
-  Image *result; // Some manipulations will return void
+  //Image *result; // Some manipulations will return void
   
   // Call Methods
   // Change Exposure
@@ -72,34 +73,34 @@ int main(int argc, char *argv[]) {
   }  
 
   // Alpha-blend
-  else if (strcmp(method, "a-blend") == 0 || strcmp(method, "blend") == 0) {
-  }
+  //  else if (strcmp(method, "a-blend") == 0 || strcmp(method, "blend") == 0) {
+  // }
 
   // Zoom in
-  else if (strcmp(method, "zoom_in") == 0) {
-    check_argc(argc, 4);
-    result = zoom_in(img);
-    write_ppm(output, result);
-  }
+  //else if (strcmp(method, "zoom_in") == 0) {
+  //  check_argc(argc, 4);
+  //  result = zoom_in(img);
+  //  write_ppm(output, result);
+  //}
 
   // Zoom out
-  else if (strcmp(method, "zoom_out") == 0) {
-  }
+  //else if (strcmp(method, "zoom_out") == 0) {
+  //}
 
   // Pointilism
-  else if (strcmp(method, "pointilism") == 0) {
-  }
+  //else if (strcmp(method, "pointilism") == 0) {
+  //}
 
   // Swirl
-  else if (strcmp(method, "swirl") == 0) {
-  }
+  //else if (strcmp(method, "swirl") == 0) {
+  //}
 
   // Blur
-  else if (strcmp(method, "blur") == 0) {
-    check_argc(argc, 5);
-    float sigma = convert_parameter(argv[3]);
-    blur(input, output, sigma); // ppm written in blur.c
-  }
+  //else if (strcmp(method, "blur") == 0) {
+  //  check_argc(argc, 5);
+  //  float sigma = convert_parameter(argv[3]);
+  //  blur(input, output, sigma); // ppm written in blur.c
+  //}
 
   else {
     fprintf(stderr, "Error: no operation name was specified, or operation name was invalid. \n");
@@ -108,11 +109,11 @@ int main(int argc, char *argv[]) {
 
   fclose(input);
   fclose(output);
-  
+
   free(img->data);
   free(img);
-  free(result->data);
-  free(result);
+  //free(result->data);
+  //free(result);
   
   return 0; // No errors
 }

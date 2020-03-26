@@ -2,9 +2,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include "change_exposure.h"
-#include "ppm_io.c"
-#include "ppm_io.h"
- 
  
 // Shift the exposure of the image by a factor of val
 void change_exposure(Image *img, float val) {
@@ -13,8 +10,8 @@ void change_exposure(Image *img, float val) {
     exit(6);
   }
 
-  int factor = pow(2.0, val);
-
+  float factor = pow(2.0, val);
+ 
   // Multiply rgb values by factor 
   // Pixel values can't be < 0 or > 255, so set
   // to 255 if either happens.
