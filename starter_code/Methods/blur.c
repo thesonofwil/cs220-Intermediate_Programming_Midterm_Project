@@ -186,6 +186,10 @@ void convolve_all(Image *originalImage, Image *output, double *filter, double si
 }
 
 void blur(FILE *input, FILE *output, double sigma) {
+  if (sigma < 0) {
+    fprintf(stderr, "Error: Sigma must be a positive number. \n");
+  }
+  
   Image *originalImg = read_ppm(input);
   Image *imgToBeBlurred = read_ppm(input);
      
