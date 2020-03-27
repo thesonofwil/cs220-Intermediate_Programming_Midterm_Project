@@ -51,14 +51,14 @@ Image * read_ppm(FILE *fp) {
   fscanf(fp, " %d %d %d ", &columns, &rows, &colorSize);
   
   if (colorSize != 255) { // It must always equal 255
-    printf("The value for colors must be 255.\n");
+    printf("Error: the value for colors must be 255.\n");
     exit(3);
   }
 
   image->cols = columns;
   image->rows = rows;
   image->data = (Pixel *)calloc(columns * rows, sizeof(Pixel)); // array to hold rgb
-   
+    
   // Read rgb values of pixels then store into an array
   fread(image->data, sizeof(Pixel), image->cols * image->rows, fp);
    
