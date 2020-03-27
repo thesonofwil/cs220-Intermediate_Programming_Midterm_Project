@@ -87,8 +87,10 @@ int main(int argc, char *argv[]) {
   // Zoom in - returns an image
   else if (strcmp(method, "zoom_in") == 0) {
    check_argc(argc, 4);
-   img = zoom_in(img);
-   write_ppm(output, img);
+   Image *result = zoom_in(img);
+   write_ppm(output, result);
+   free(result->data);
+   free(result);
   }
 
   // Zoom out
@@ -107,8 +109,10 @@ int main(int argc, char *argv[]) {
   else if (strcmp(method, "blur") == 0) {
     check_argc(argc, 5);
     float sigma = convert_parameter(argv[4]);
-    img = blur(img, sigma); // ppm written in blur.c
-    write_ppm(output, img);
+    Image *result = blur(img, sigma); 
+    write_ppm(output, result);
+    free(result->data);
+    free(result);
   }
 
   else {

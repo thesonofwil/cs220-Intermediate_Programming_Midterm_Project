@@ -57,12 +57,13 @@ Image * read_ppm(FILE *fp) {
 
   image->cols = columns;
   image->rows = rows;
-  image->data = (Pixel *)calloc(columns * rows, sizeof(Pixel)); // array to hold rgb
-    
+  image->data = (Pixel *)calloc(columns * rows + 1, sizeof(Pixel)); // array to hold rgb
+  // +1 fixes valgrind issues somehow(?)
+  
   // Read rgb values of pixels then store into an array
   fread(image->data, sizeof(Pixel), image->cols * image->rows, fp);
    
-  // free mallocs in main
+  // free mallocs in project.c
   return image;
 }
 

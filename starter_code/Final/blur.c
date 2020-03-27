@@ -211,8 +211,6 @@ Image *blur(Image *img, double sigma) {
   convolve_all(img, copyToBeBlurred, gaussianFilter, sigma);
  
   free(gaussianFilter);
-  free(img->data);
-  free(img);
-  
+   
   return copyToBeBlurred;
 }
