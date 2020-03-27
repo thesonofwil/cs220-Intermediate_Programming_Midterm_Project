@@ -34,7 +34,7 @@ Image * read_ppm(FILE *fp) {
   fscanf(fp, "%2s \n", type); // read 2 characters into type
   type[2] = '\0';
   if (strcmp(type, "P6") != 0) {
-    printf("Invalid file type.\n");
+    printf("Error: invalid file type.\n");
     exit(3);
   }
    
@@ -52,7 +52,7 @@ Image * read_ppm(FILE *fp) {
   
   if (colorSize != 255) { // It must always equal 255
     printf("The value for colors must be 255.\n");
-    exit(1);
+    exit(3);
   }
 
   image->cols = columns;
@@ -85,6 +85,7 @@ int write_ppm(FILE *fp, const Image *im) {
 
   if (num_pixels_written != im->cols * im->rows) {
     fprintf(stderr, "Uh oh. Pixel data failed to write properly!\n");
+    exit(7); // Added error condition
   }
 
   return num_pixels_written;
