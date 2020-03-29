@@ -34,7 +34,7 @@ Image * read_ppm(FILE *fp) {
   fscanf(fp, "%2s \n", type); // read 2 characters into type
   type[2] = '\0';
   if (strcmp(type, "P6") != 0) {
-    printf("Invalid file type.\n");
+    printf("Error: invalid file type.\n");
     exit(3);
   }
    
@@ -51,18 +51,19 @@ Image * read_ppm(FILE *fp) {
   fscanf(fp, " %d %d %d ", &columns, &rows, &colorSize);
   
   if (colorSize != 255) { // It must always equal 255
-    printf("The value for colors must be 255.\n");
-    exit(1);
+    printf("Error: the value for colors must be 255.\n");
+    exit(3);
   }
 
   image->cols = columns;
   image->rows = rows;
-  image->data = (Pixel *)calloc(columns * rows, sizeof(Pixel)); // array to hold rgb
-   
+  image->data = (Pixel *)calloc(columns * rows + 1, sizeof(Pixel)); // array to hold rgb
+  // +1 fixes valgrind issues somehow(?)
+  
   // Read rgb values of pixels then store into an array
   fread(image->data, sizeof(Pixel), image->cols * image->rows, fp);
    
-  // free mallocs in main
+  // free mallocs in project.c
   return image;
 }
 
@@ -85,6 +86,7 @@ int write_ppm(FILE *fp, const Image *im) {
 
   if (num_pixels_written != im->cols * im->rows) {
     fprintf(stderr, "Uh oh. Pixel data failed to write properly!\n");
+    exit(7); // Added error condition
   }
 
   return num_pixels_written;
