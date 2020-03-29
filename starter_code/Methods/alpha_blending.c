@@ -2,6 +2,12 @@
 //aegbe2
 //alpha_blending.c function
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "ppm_io.c"
+#include "ppm_io.h"
+
+
 void alpha_blending(Image *Image1, Image *Image2, float alpha){
   // check to make sure inputs are valid
   if( Image1 == NULL || Image2 == NULL || ratio == NULL){
@@ -35,44 +41,69 @@ void alpha_blending(Image *Image1, Image *Image2, float alpha){
   //create output Image
 
   Image *output = (Image*) malloc(sizeof(Image));
-  //adds all the Image2 data to Image1
-  if(Image1.rows >= Image2.rows){
-    for(int k = 0; k < Image2.rows){
-      *(Image1.data + k).r = *(Image1.data + k).r + *(Image2.data + k).r;
-      //make sure max values for R is 255
-      if( *(Image1.data + k).r > 255){
-	*(Image1.data + k).r = 255;
-      }
-      *(Image1.data + k).g = *(Image1.data + k).g + *(Image2.data + k).g;
-      //make sure max value for G is 255
-      if( *(Image1.data + k).g > 255){
-        *(Image1.data + k).g = 255;
-      }
-      *(Image1.data + k).b = *(Image1.data + k).b + *(Image2.data + k).b;
-      //make sue max value for B is 255
-      if( *(Image1.data + k).b > 255){
-        *(Image1.data + k).b = 255;
-      }
-    } 
-    else {
-      for(int l = 0; l < Image1.rows){
-        *(Image2.data + l).r = *(Image2.data + l).r + *(Image1.data + l).r;
-        //make sue max value for R is 255
-        if( *(Image2.data + l).r > 255){
-          *(Image2.data + l).r = 255;
+  //create new dimensions for output image
+  if(Image1->rows >= Image2->rows){
+    output->rows = Image1->rows;
+  }
+  else{
+    output->rows = Image2->rows;
+  }
+
+  if(Image1->cols >= Image2->cols){
+    output->cols = Image1->cols;
+  }
+  else{
+    output->cols = Image2->cols;
+  }
+  //create new data array based on new dimensions for output image
+  output->data = output->rows * output->cols;
+
+  //case1
+  if( (output->rows == Image1->rows) && (output->cols == Image1->cols)){
+    for(int k = 0; k < Image2->rows; k++){
+      for(int l = 0; l < Image2->cols; l++){
+	//combine R values from image1 & image2 into output image
+	*(output.data + (k*(Image2->cols)+l)).r =  *(Image1.data + (k*(Image2->cols)+l)).r +  *(Image2.data + (k*(Image2->cols)+l)).r;
+	//Make sure all the R values are good
+	if (  *(output.data + (k*(Image2->cols)+l)).r > 255) {
+	  *(output.data + (k*(Image2->cols)+l)).r = 255;
+	}
+	//combine G values from image1 & image2 into output image
+        *(output.data + (k*(Image2->cols)+l)).g =  *(Image1.data + (k*(Image2->cols)+l)).g +  *(Image2.data + (k*(Image2->cols)+l)).g;
+        //Make sure all the G values are good
+        if (  *(output.data + (k*(Image2->cols)+l)).g > 255) {
+          *(output.data + (k*(Image2->cols)+l)).g = 255;
         }
-        *(Image2.data + l).g = *(Image2.data + l).g + *(Image1.data + l).g;
-        //make sue max value for G  is 255
-        if( *(Image2.data + l).g > 255){
-          *(Image2.data + l).g = 255;
-        }
-        *(Image2.data + l).b = *(Image2.data + l).b + *(Image1.data + l).b;
-        //make sue max value for B is 255
-        if( *(Image2.data + k).b > 255){
-        *(Image2.data + k).b = 255;
+	//combine B values from image1 & image2 into output image
+        *(output.data + (k*(Image2->cols)+l)).b =  *(Image1.data + (k*(Image2->cols)+l)).b +  *(Image2.data + (k*(Image2->cols)+l)).b;
+        //Make sure all the B values are good
+        if (  *(output.data + (k*(Image2->cols)+l)).b > 255) {
+          *(output.data + (k*(Image2->cols)+l)).b = 255;
         }
       }
-    }//ends else statment
-  }//ends if statement
+      //makes sure all the data in the columns for the overlapping rows are equal to image1
+      for(int m = Image2->cols; m < output->cols, m++){
+	*(output.data + (k*(output->cols)+m)).r =  *(Image1.data + (k*(output->cols)+m)).r;
+	*(output.data + (k*(output->cols)+m)).g =  *(Image1.data + (k*(output->cols)+m)).g;
+	*(output.data + (k*(output->cols)+m)).b =  *(Image1.data + (k*(output->cols)+m)).b;
+      }
+    }
+    //making the rest of the output data equal to Image 1 data
+    for(int n = Image2->rows; n < output->rows; n++){
+      for(int o = Image2->cols; o < output->colss; o++){
+	*(output.data + (n*(output->cols)+o)).r =  *(Image1.data + (n*(output->cols)+o)).r;
+        *(output.data + (n*(output->cols)+o)).g =  *(Image1.data + (n*(output->cols)+o)).g;
+        *(output.data + (n*(output->cols)+o)).b =  *(Image1.data + (n*(output->cols)+o)).b;
+      }
+    }
+  }
+
+
+
+
+
+
+ 
+  
    
 
