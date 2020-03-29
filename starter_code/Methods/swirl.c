@@ -36,4 +36,7 @@ int main (void) {
 }
 
 //note that output pixels corresponding to out-of-bound pixels should just be rendered as black //
-//working on swirl.c rn
+int implementation (void) {
+
+  return 0;
+}
