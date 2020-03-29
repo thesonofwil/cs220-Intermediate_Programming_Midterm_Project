@@ -25,7 +25,7 @@ float convert_parameter(char *arg) {
   char *check;
 
   float parameter = strtof(arg, &check);
-  if (strlen(check) > 0) { // i.e. argument contains non-numeric symbols
+  if (strlen(check) > 0) { // i.e. argument contains non-numeric symbols, argument is a string
     fprintf(stderr, "Error: specified argument must be a number. \n");
     exit(5);
   }
@@ -102,8 +102,16 @@ int main(int argc, char *argv[]) {
   //}
 
   // Swirl
-  //else if (strcmp(method, "swirl") == 0) {
-  //}
+  else if (strcmp(method, "swirl") == 0) {
+    check_argc(argc, 7);
+    double scale = convert_parameter(arg[6]);
+    Image *result = swirl(img, center_x, center_y, scale);
+    write_ppm(output, result);
+    free(result->data);
+    free(result);
+
+
+  }
 
   // Blur
   else if (strcmp(method, "blur") == 0) {

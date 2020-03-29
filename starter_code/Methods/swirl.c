@@ -1,3 +1,6 @@
+//Marcelo Morales
+//lmoral10
+
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -8,7 +11,7 @@
 /*
 swirl does not change the colors any pixels in the image
 only change the location of some or all pixels in the image
-siwrl is an image warping operation that creates a whirpool effect by performing a non-linear deformation 
+swirl is an image warping operation that creates a whirpool effect by performing a non-linear deformation 
 on the image
 two inputs provided by user
 a center and a distortion scale
@@ -31,22 +34,22 @@ a higher scale value results in a lesser amount of swirl effect
 
 //blur should be a floating point value
 
-void swirl (Image * img) {
+
   //having trouble wich pixels to pick, how do i convey this through code
   int xCenter;
-  int yCenter;
 
-}
-//distorition swirl is an int
+//distorition swirl is a double
   //swirl alpha values should uses double
 //int x is the arbitrary x coordinate of a pixel
 //int y is the arbirary y coordinate of a pixel
 
-//sigma should be positive, if negative, report error based on table (should be 6) and exit
+//swirl strengthshould be positive, if negative, report error based on table (should be 6) and exit
 
 //pixel data should be initizliaed to all zeroes
 
 //will need to create a new image to hold the result, the swirl transformation cannot be done in place
+
+
 double calc_alpha (int center_x, int center_y, int scale, int x, int y) {
 
   double alpha = sqrt(pow(x - center_x, 2) + (pow(y - center_y, 2)))/ scale;
