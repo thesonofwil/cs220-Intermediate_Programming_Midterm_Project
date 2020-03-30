@@ -49,7 +49,7 @@ a higher scale value results in a lesser amount of swirl effect
 
 //will need to create a new image to hold the result, the swirl transformation cannot be done in place
 
-
+/*
 double calc_alpha (int center_x, int center_y, int scale, int x, int y) {
 
   double alpha = sqrt(pow(x - center_x, 2) + (pow(y - center_y, 2)))/ scale;
@@ -67,6 +67,9 @@ int main (void) {
 
 //note that output pixels corresponding to out-of-bound pixels should just be rendered as black //
 
+
+
+
 int n;
 if (sscanf(argv[4], "%f", &n) != 1) {
   fprintf(stderr, "Incorrect argument given, requires an int as corresponding argument");
@@ -74,3 +77,68 @@ if (sscanf(argv[4], "%f", &n) != 1) {
   // argv[4] didn't contain valid representation of integer value, report error
 }
 Image *blurred_image = blur(original, n);
+*/
+
+
+
+double calc_alpha (int center_x, int center_y, int scale, int x, int y) {
+  double alpha = sqrt(pow(x - center_x, 2) + (pow(y - center_y, 2)))/ scale;
+  return alpha;
+}	
+
+int conversion_for_x_pixel (int x_coord_pixel, int y_coord_pixel, int center_x, int center_y, double alpha) {
+  return (x_coord_pixel - center_x) cos(alpha) - (y_coord_pixel - center_y) sin (alpha) + center_x;
+}
+
+int conversion_for_y_pixel (int x_coord_pixel, int y_coord_pixel, int center_x, int center_y, double alpha) {
+  return (x_coord_pixel - center_x) sin(alpha) + (y_coord_pixel - center_y) cos (alpha) + center_y;
+}
+
+
+
+
+Image * swirl (Image * img_input, int center_x, int center_y, int scale) {
+  Image *img_output = (Image *)malloc(sizeof(Image));
+  int cols = img_input -> cols;
+  int rows = img_input -> rows;
+  img_output -> cols = cols;
+  img_output -> rows = rows;
+  img_output -> data = (Pixel *) malloc (rows * cols * sizeof(Pixel));
+
+  //initialize output image to all zeros for black image
+  for (int i = 0; i <= img->rows * img-> cols; i++) {
+    img->data[i].r = 0;
+    img->data[i].g = 0;
+    img->data[i].b = 0;
+  }
+
+  int x_coord_pixel = 0;
+  int y_coord_pixel = 0;
+
+  for (int y_coord_pixel = 0; y_coord_pixel < img_output -> rows; ++y_coord_pixel) {
+    for (int x_coord_pixel = 0; x_coord_pixel < img_output -> cols; ++x_coord_pixel) {
+
+      double alpha = calc_alpha (center_x, center_y, scale, x_coord_pixel, y_coord_pixel);
+      int new_x_coord = conversion_for_x_pixel (x_coord_pixel, y_coord_pixel, center_x, center_y, alpha);
+      int new_y_coord = conversion_for_y_pixel (x_coord_pixel, y_coord_pixel, center_x, center_y, alpha);
+
+      //change location of pixel
+      //swap old pixel with new pixel, change location of pixel
+
+      
+
+
+
+    }
+  }
+
+  
+
+
+
+
+
+  return output;
+}
+
+
