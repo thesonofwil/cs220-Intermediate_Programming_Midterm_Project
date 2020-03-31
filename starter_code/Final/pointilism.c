@@ -6,19 +6,59 @@
 #include <stdlib.h>
 #include "ppm_io.c"
 #include "ppm_io.h"
+#include <math.h>
 
 void pointilism(Image *img) {
+
   int area = img->rows * img->cols;
-  int targetNumber = area * 0.03; // does this need to be random?
+  int numPixels = area * 0.03; // does this need to be random?
 
-  for (int i = 0; i < targetNumber; i++) {
-    int col = rand() % img->cols + 1; // generate a random x coordinate
-    int row = rand() % img->rows + 1; // generate a random y coordinate
+  for (int i = 0; i < numPixels; i++) {
+    int x_center = rand() % img -> cols;
+    int y_center = rand() % img -> rows;
+    int radius = rand() % 5 + 1;
 
-    int radius = rand() % 5 + 1; // get a random radius [0, 5]
+    for (int y_coord = y_center - radius; y_coord <= y_center + radius; ++y_coord) {
+      for (int x_coord = x_center - radius; x_coord <= x_center + radius; ++x_coord) {
+        if ( (y_coord >= 0 && y_coord <= img-> rows) && (x_coord >= 0 && x_coord <= img->cols) ) {
 
+          if  ( pow(x_center - x_coord, 2) + pow(y_center - y_coord, 2) <= pow(radius, 2) ) {
+            //color in with center
+          img->data[x_coord * img->cols + y_coord].r = img->data[x_center * img->cols + y_center].r;
+          img->data[x_coord * img->cols + y_coord].g = img->data[x_center * img->cols + y_center].g;
+          img->data[x_coord * img->cols + y_coord].b = img->data[x_center * img->cols + y_center].b;
+          } 
+          //color in pixel in the pixel with chosen center
+        }
+      continue;
+      }
+    
+    
+    
+      }  
+    }
+
+    //return img;
   }
-}
+
+
+/*
+  void color_disk (Image *img, int x_coord, int y_coord, int x_center, int y_center, int radius, int numPixels) {
+//all pixels satisfying
+//(x-a)^2 + (y-b)^2 <= r^2,
+//where (a, b) are the coordinates of the central pixel to be pointilized
+  
+  //iterate through all the pixels 
+  for (int i = 0; i < numPixels; ++i)
+
+  if (pow(x_center - x_coord, 2) + pow(y_center - y_coord, 2) <= pow(radius, 2) {
+    img->data[x_coord * img->cols + y_coord].r = img->data[x_center * img->cols + y_center].r;
+    img->data[x_coord * img->cols + y_coord].g = img->data[x_center * img->cols + y_center].g;
+    img->data[x_coord * img->cols + y_coord].b = img->data[x_center * img->cols + y_center].b;
+  } 
+
+ }
+*/
 
 /*
 apply pointilism-like effect to an input image

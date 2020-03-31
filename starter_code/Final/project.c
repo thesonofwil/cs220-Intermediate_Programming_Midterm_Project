@@ -11,6 +11,7 @@
 #include "change_exposure.h"
 #include "zoom_in.h"
 #include "blur.h"
+#include "pointilism.h"
 
 // Check if the number of arguments meet what is required for the manipulation
 void check_argc(int argc, int req) {
@@ -98,8 +99,13 @@ int main(int argc, char *argv[]) {
   //}
 
   // Pointilism
-  //else if (strcmp(method, "pointilism") == 0) {
-  //}
+  //pointilism is void 
+  else if (strcmp(method, "pointilism") == 0) {
+    check_argc(argc, 4);
+    pointilism(img);
+    write_ppm(output, img);
+
+  }
 
   // Swirl
   else if (strcmp(method, "swirl") == 0) {
