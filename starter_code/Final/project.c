@@ -13,7 +13,7 @@
 #include "pointilism.h"
 #include "swirl.h"
 
-//#include "ppm_io.c"
+#include "ppm_io.c"
 //#include "swirl.c"
 
 
