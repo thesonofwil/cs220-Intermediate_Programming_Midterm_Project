@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include "ppm_io.h"
 #include <math.h>
-#include "ppm_io.c"
 #include "swirl.h"
 
 

@@ -4,8 +4,8 @@ LDLIBS=-lm
 
 # Create the project executable
 # Add methods here
-project: project.o change_exposure.o zoom_in.o blur.o pointilism.o -lm
-	$(CC) $(LDLIBS) -o project project.o change_exposure.o zoom_in.o blur.o pointilism.o 
+project: project.o change_exposure.o zoom_in.o blur.o pointilism.o  swirl.o
+	$(CC) $(LDLIBS) -o project project.o change_exposure.o zoom_in.o blur.o pointilism.o swirl.o
 
 #demo: demo_ppm.o ppm_io.o
 #	$(CC) demo_ppm.o ppm_io.o -o demo
@@ -26,10 +26,10 @@ zoom_in.o: zoom_in.c zoom_in.h
 blur.o: blur.c blur.h
 	$(CC) $(CFLAGS) $(LDLIBS) -c blur.c
 
-pointilism.o: pointilism pointilism.h
+pointilism.o: pointilism.c pointilism.h
 	$(CC) $(CFLAGS) $(LDLIBS) -c pointilism.c
 
-swirl.o: swirl swirl.h
+swirl.o: swirl.c swirl.h
 	$(CC) $(CFLAGS) $(LDLIBS) -c swirl.c 
 
 clean:

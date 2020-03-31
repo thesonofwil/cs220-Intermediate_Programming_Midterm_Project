@@ -13,6 +13,7 @@
 #include "blur.h"
 #include "pointilism.h"
 #include "swirl.h"
+//#include "swirl.c"
 
 // Check if the number of arguments meet what is required for the manipulation
 void check_argc(int argc, int req) {
@@ -121,13 +122,13 @@ int main(int argc, char *argv[]) {
 
     //center_x and center_y cannot be ouside of image
     if (center_x >  img->rows || center_y > img->cols ) {
-      fprintf(stderr, "Error: Center of image warm has to be inside the image \n");
+      fprintf(stderr, "Error: Center of image has to be inside the image \n");
       exit(6);
     }
 
     //distortion scale should be a positive integer
     if ((int)scale <= 0) { 
-      fprintf(stderr, "Error: Center of image warm has to be inside the image \n");
+      fprintf(stderr, "Error: Center of image has to be inside the image \n");
       exit(6);
     }
 
@@ -151,8 +152,9 @@ int main(int argc, char *argv[]) {
   }
 
   else {
-    fprintf(stderr, "Error: operation name was invalid. \n");
-    exit(4);
+    printf("BAD\n");
+    fprintf(stderr, "Error: operation name was invalid. hello \n");
+    //exit(4);
   }
 
   fclose(input);
