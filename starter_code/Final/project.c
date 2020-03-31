@@ -104,12 +104,27 @@ int main(int argc, char *argv[]) {
   // Swirl
   else if (strcmp(method, "swirl") == 0) {
     check_argc(argc, 7);
-    double scale = convert_parameter(arg[6]);
+    double scale = convert_parameter(argv[6]);
+    int center_x = (int)convert_parameter(argv[4]);  //truncating float to int
+    int center_y = (int)convert_parameter(argv[5]);  //truncating float to int
+
+    //center_x and center_y cannot be ouside of image
+    if (center_x >  img->rows || center_y > img->cols ) {
+      fprintf(stderr, "Error: Center of image warm has to be inside the image \n");
+      exit(6);
+    }
+
+    //distortion scale should be a positive integer
+    if ((int)scale <= 0) { 
+      fprintf(stderr, "Error: Center of image warm has to be inside the image \n");
+      exit(6);
+    }
+
+    
     Image *result = swirl(img, center_x, center_y, scale);
     write_ppm(output, result);
     free(result->data);
     free(result);
-
 
   }
 
