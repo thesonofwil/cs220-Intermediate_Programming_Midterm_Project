@@ -56,7 +56,7 @@ void alpha_blending(Image *Image1, Image *Image2, float alpha){
     output->cols = Image2->cols;
   }
   //create new data array based on new dimensions for output image
-  output->data = output->rows * output->cols;
+  output->data = (Pixel *) malloc( output->rows * output->cols * sizeof(Pixel)) ;
 
   //case1
   if( (output->rows == Image1->rows) && (output->cols == Image1->cols)){
@@ -98,9 +98,143 @@ void alpha_blending(Image *Image1, Image *Image2, float alpha){
     }
   }
 
+ //case2
+  if( (output->rows == Image1->rows) && (output->cols == Image2->cols)){
+    for(int k = 0; k < Image2->rows; k++){
+      for(int l = 0; l < Image1->cols; l++){
+        //combine R values from image1 & image2 into output image
+        *(output.data + (k*(Image1->cols)+l)).r =  *(Image1.data + (k*(Image1->cols)+l)).r +  *(Image2.data + (k*(Image1->cols)+l)).r;
+        //Make sure all the R values are good
+        if (  *(output.data + (k*(Image1->cols)+l)).r > 255) {
+          *(output.data + (k*(Image1->cols)+l)).r = 255;
+        }
+        //combine G values from image1 & image2 into output image
+        *(output.data + (k*(Image1->cols)+l)).g =  *(Image1.data + (k*(Image1->cols)+l)).g +  *(Image2.data + (k*(Image1->cols)+l)).g;
+        //Make sure all the G values are good
+        if (  *(output.data + (k*(Image1->cols)+l)).g > 255) {
+          *(output.data + (k*(Image1->cols)+l)).g = 255;
+        }
+        //combine B values from image1 & image2 into output image
+        *(output.data + (k*(Image1->cols)+l)).b =  *(Image1.data + (k*(Image1->cols)+l)).b +  *(Image2.data + (k*(Image1->cols)+l)).b;
+        //Make sure all the B values are good
+        if (  *(output.data + (k*(Image1->cols)+l)).b > 255) {
+          *(output.data + (k*(Image1->cols)+l)).b = 255;
+        }
+      }
+       //makes sure all the data in the columns for the overlapping rows are equal to image2
+      for(int m = Image1->cols; m < output->cols, m++){
+        *(output.data + (k*(output->cols)+m)).r =  *(Image2.data + (k*(output->cols)+m)).r;
+        *(output.data + (k*(output->cols)+m)).g =  *(Image2.data + (k*(output->cols)+m)).g;
+        *(output.data + (k*(output->cols)+m)).b =  *(Image2.data + (k*(output->cols)+m)).b;
+      }
+    }
 
+     //making the rest of the rows in output data equal to Image 1 data
+    for(int n = Image2->rows; n < output->rows; n++){
+      for(int o = 0; o < Image1->cols; o++){
+        *(output.data + (n*(Image1->cols)+o)).r =  *(Image1.data + (n*(Image1->cols)+o)).r;
+        *(output.data + (n*(Image1->cols)+o)).g =  *(Image1.data + (n*(Image1->cols)+o)).g;
+        *(output.data + (n*(Image1->cols)+o)).b =  *(Image1.data + (n*(Image1->cols)+o)).b;
+      }
+      //makiing the rest of the cols in output data equal to Image 2 data
+      for(int p = Image1->cols; p < output->cols; o++){
+        *(output.data + (n*(output->cols)+p)).r =  *(Image2.data + (n*(output->cols)+p)).r;
+        *(output.data + (n*(output->cols)+p)).g =  *(Image2.data + (n*(output->cols)+p)).g;
+        *(output.data + (n*(output->cols)+p)).b =  *(Image2.data + (n*(output->cols)+p)).b;
+      }
+    }
+        
+  }
 
+ //case3
+  if( (output->rows == Image2->rows) && (output->cols == Image1->cols)){
+    for(int k = 0; k < Image1->rows; k++){
+      for(int l = 0; l < Image2->cols; l++){
+        //combine R values from image1 & image2 into output image
+        *(output.data + (k*(Image2->cols)+l)).r =  *(Image1.data + (k*(Image2->cols)+l)).r +  *(Image2.data + (k*(Image2->cols)+l)).r;
+        //Make sure all the R values are good
+        if (  *(output.data + (k*(Image2->cols)+l)).r > 255) {
+          *(output.data + (k*(Image2->cols)+l)).r = 255;
+        }
+        //combine G values from image1 & image2 into output image
+        *(output.data + (k*(Image2->cols)+l)).g =  *(Image1.data + (k*(Image2->cols)+l)).g +  *(Image2.data + (k*(Image2->cols)+l)).g;
+        //Make sure all the G values are good
+        if (  *(output.data + (k*(Image2->cols)+l)).g > 255) {
+          *(output.data + (k*(Image2->cols)+l)).g = 255;
+        }
+        //combine B values from image1 & image2 into output image
+        *(output.data + (k*(Image2->cols)+l)).b =  *(Image1.data + (k*(Image2->cols)+l)).b +  *(Image2.data + (k*(Image2->cols)+l)).b;
+        //Make sure all the B values are good
+        if (  *(output.data + (k*(Image2->cols)+l)).b > 255) {
+          *(output.data + (k*(Image2->cols)+l)).b = 255;
+        }
+      }
+       //makes sure all the data in the columns for the overlapping rows are equal to image1
+      for(int m = Image2->cols; m < output->cols, m++){
+        *(output.data + (k*(output->cols)+m)).r =  *(Image1.data + (k*(output->cols)+m)).r;
+        *(output.data + (k*(output->cols)+m)).g =  *(Image1.data + (k*(output->cols)+m)).g;
+        *(output.data + (k*(output->cols)+m)).b =  *(Image1.data + (k*(output->cols)+m)).b;
+      }
+    }
 
+     //making the rest of the rows in output data equal to Image 2 data
+    for(int n = Image1->rows; n < output->rows; n++){
+      for(int o = 0; o < Image2->cols; o++){
+        *(output.data + (n*(Image1->cols)+o)).r =  *(Image2.data + (n*(Image1->cols)+o)).r;
+        *(output.data + (n*(Image1->cols)+o)).g =  *(Image2.data + (n*(Image1->cols)+o)).g;
+        *(output.data + (n*(Image1->cols)+o)).b =  *(Image2.data + (n*(Image1->cols)+o)).b;
+      }
+      //makiing the rest of the cols in output data equal to Image 1 data
+      for(int p = Image2->cols; p < output->cols; o++){
+        *(output.data + (n*(output->cols)+p)).r =  *(Image1.data + (n*(output->cols)+p)).r;
+        *(output.data + (n*(output->cols)+p)).g =  *(Image1.data + (n*(output->cols)+p)).g;
+        *(output.data + (n*(output->cols)+p)).b =  *(Image1.data + (n*(output->cols)+p)).b;
+      }
+    }
+
+  }
+
+ //case4
+  if( (output->rows == Image2->rows) && (output->cols == Image2->cols)){
+    for(int k = 0; k < Image1->rows; k++){
+      for(int l = 0; l < Image1->cols; l++){
+        //combine R values from image1 & image2 into output image
+        *(output.data + (k*(Image1->cols)+l)).r =  *(Image1.data + (k*(Image1->cols)+l)).r +  *(Image2.data + (k*(Image1->cols)+l)).r;
+        //Make sure all the R values are good
+        if (  *(output.data + (k*(Image1->cols)+l)).r > 255) {
+          *(output.data + (k*(Image1->cols)+l)).r = 255;
+        }
+        //combine G values from image1 & image2 into output image
+        *(output.data + (k*(Image1->cols)+l)).g =  *(Image1.data + (k*(Image1->cols)+l)).g +  *(Image2.data + (k*(Image1->cols)+l)).g;
+        //Make sure all the G values are good
+        if (  *(output.data + (k*(Image1->cols)+l)).g > 255) {
+          *(output.data + (k*(Image1->cols)+l)).g = 255;
+        }
+        //combine B values from image1 & image2 into output image
+        *(output.data + (k*(Image1->cols)+l)).b =  *(Image1.data + (k*(Image1->cols)+l)).b +  *(Image2.data + (k*(Image1->cols)+l)).b;
+        //Make sure all the B values are good
+        if (  *(output.data + (k*(Image1->cols)+l)).b > 255) {
+          *(output.data + (k*(Image1->cols)+l)).b = 255;
+        }
+      }
+      //makes sure all the data in the columns for the overlapping rows are equal to image2
+      for(int m = Image1->cols; m < output->cols, m++){
+        *(output.data + (k*(output->cols)+m)).r =  *(Image2.data + (k*(output->cols)+m)).r;
+        *(output.data + (k*(output->cols)+m)).g =  *(Image2.data + (k*(output->cols)+m)).g;
+        *(output.data + (k*(output->cols)+m)).b =  *(Image2.data + (k*(output->cols)+m)).b;
+      }
+    }
+     //making the rest of the output data equal to Image 2 data
+    for(int n = Image1->rows; n < output->rows; n++){
+      for(int o = Image1->cols; o < output->colss; o++){
+        *(output.data + (n*(output->cols)+o)).r =  *(Image2.data + (n*(output->cols)+o)).r;
+        *(output.data + (n*(output->cols)+o)).g =  *(Image2.data + (n*(output->cols)+o)).g;
+        *(output.data + (n*(output->cols)+o)).b =  *(Image2.data + (n*(output->cols)+o)).b;
+      }
+    }
+  }
+
+}
 
 
  
