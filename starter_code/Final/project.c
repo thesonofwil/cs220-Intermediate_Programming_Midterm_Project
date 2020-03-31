@@ -14,7 +14,7 @@
 #include "swirl.h"
 
 #include "ppm_io.c"
-//#include "swirl.c"
+
 
 
 // Check if the number of arguments meet what is required for the manipulation
@@ -118,7 +118,7 @@ int main(int argc, char *argv[]) {
   // Swirl
   else if (strcmp(method, "swirl") == 0) {
     check_argc(argc, 7);
-    double scale = convert_parameter(argv[6]);
+    int scale = (int)convert_parameter(argv[6]);
     int center_x = (int)convert_parameter(argv[4]);  //truncating float to int
     int center_y = (int)convert_parameter(argv[5]);  //truncating float to int
 
@@ -134,12 +134,13 @@ int main(int argc, char *argv[]) {
       exit(6);
     }
 
-    
-    Image *result = swirl(img, center_x, center_y, scale);
-    write_ppm(output, result);
+    swirl(img, center_x, center_y, scale);
+    //Image *result = swirl(img, center_x, center_y, scale);
+    write_ppm(output, img);
     printf("CHECK DELETE THIS AFTER \n");
-    free(result->data);
-    free(result);
+    //free(result->data);
+    //free(result);
+
 
   }
 
