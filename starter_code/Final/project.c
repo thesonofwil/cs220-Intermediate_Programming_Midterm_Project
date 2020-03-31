@@ -137,7 +137,6 @@ int main(int argc, char *argv[]) {
     swirl(img, center_x, center_y, scale);
     //Image *result = swirl(img, center_x, center_y, scale);
     write_ppm(output, img);
-    printf("CHECK DELETE THIS AFTER \n");
     //free(result->data);
     //free(result);
 
