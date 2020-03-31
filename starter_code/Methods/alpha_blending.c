@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include "ppm_io.c"
 #include "ppm_io.h"
-
+#include "alpha_blending.h"
 
 Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
   // check to make sure inputs are valid
