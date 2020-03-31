@@ -6,14 +6,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "ppm_io.c"
 #include "ppm_io.h"
 #include "change_exposure.h"
 #include "zoom_in.h"
 #include "blur.h"
 #include "pointilism.h"
 #include "swirl.h"
+
+//#include "ppm_io.c"
 //#include "swirl.c"
+
 
 // Check if the number of arguments meet what is required for the manipulation
 void check_argc(int argc, int req) {
@@ -93,8 +95,7 @@ int main(int argc, char *argv[]) {
    check_argc(argc, 4);
    Image *result = zoom_in(img);
    write_ppm(output, result);
-   printf("CHECK \n \n");
-   fprintf(stdout, "check\n");
+   printf("CHECK DELETE THIS AFTER \n");
    free(result->data);
    free(result);
   }
@@ -106,10 +107,11 @@ int main(int argc, char *argv[]) {
   // Pointilism
   //pointilism is void 
   else if (strcmp(method, "pointilism") == 0) {
+    printf("hi\n");
     check_argc(argc, 4);
     pointilism(img);
     write_ppm(output, img);
-    fprintf(stdout, "check\n");
+    printf("CHECK DELETE THIS AFTER \n");
 
   }
 
@@ -135,7 +137,7 @@ int main(int argc, char *argv[]) {
     
     Image *result = swirl(img, center_x, center_y, scale);
     write_ppm(output, result);
-    fprintf(stdout, "check\n");
+    printf("CHECK DELETE THIS AFTER \n");
     free(result->data);
     free(result);
 

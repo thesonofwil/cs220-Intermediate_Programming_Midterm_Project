@@ -7,6 +7,7 @@
 #include "ppm_io.h"
 #include "math.h"
 
+
 void pointilism(Image *img);
 
 #endif
