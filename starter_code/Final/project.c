@@ -12,6 +12,7 @@
 #include "zoom_in.h"
 #include "blur.h"
 #include "pointilism.h"
+#include "swirl.h"
 
 // Check if the number of arguments meet what is required for the manipulation
 void check_argc(int argc, int req) {
@@ -36,6 +37,7 @@ float convert_parameter(char *arg) {
 
 
 int main(int argc, char *argv[]) {
+  //printf("hello\n");
   char *inputFile;
   char *outputFile;
   char *method;
@@ -90,6 +92,8 @@ int main(int argc, char *argv[]) {
    check_argc(argc, 4);
    Image *result = zoom_in(img);
    write_ppm(output, result);
+   printf("CHECK \n \n");
+   fprintf(stdout, "check\n");
    free(result->data);
    free(result);
   }
@@ -104,6 +108,7 @@ int main(int argc, char *argv[]) {
     check_argc(argc, 4);
     pointilism(img);
     write_ppm(output, img);
+    fprintf(stdout, "check\n");
 
   }
 
@@ -129,6 +134,7 @@ int main(int argc, char *argv[]) {
     
     Image *result = swirl(img, center_x, center_y, scale);
     write_ppm(output, result);
+    fprintf(stdout, "check\n");
     free(result->data);
     free(result);
 

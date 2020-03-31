@@ -8,9 +8,6 @@
 #include "ppm_io.c"
 #include "swirl.h"
 
-//having trouble linking math.h
-
-
 
 double calc_alpha (int center_x, int center_y, int scale, int x, int y) {
   double alpha = sqrt(pow(x - center_x, 2) + (pow(y - center_y, 2)))/ scale;
