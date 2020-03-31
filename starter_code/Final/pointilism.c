@@ -24,7 +24,7 @@ void pointilism(Image *img) {
 apply pointilism-like effect to an input image
 
 randomly select a small set (3%) of the pixels in an input image and apply effect to them
-imagine each randomly selected pixel is at the center of a cirlce with a random radius between 1 and 5
+imagine each randomly selected pixel is at the center of a circle with a random radius between 1 and 5
 
 now apply pointilism effect - color all the pixels that reside in that circle with the same color 
 as the color of the randomly selected pixel which is at the center
@@ -34,7 +34,7 @@ image, where each dot is uniformly colored with the color of the randomly select
 located at the center of that dot
 
 APPLY EFFECT TO ONLY 3% OF THE TOTAL PIXELS OF THE INPUT IMAGE
-FOR EACH RANDOMLY SELECTED PIXEL, USE A RANDOM RADIUS BETWEEN 1 AND 5 WHEN VREATING THE FILLED COLOR DOT
+FOR EACH RANDOMLY SELECTED PIXEL, USE A RANDOM RADIUS BETWEEN 1 AND 5 WHEN CREATING THE FILLED COLOR DOT
 
 DO NOT MAKE ANY CALLS TO srand()
 
@@ -77,7 +77,7 @@ int pPix = 0.03 * numPixel;
     for(int j = centerY - radius; j <=centerY + radius; j++){
       for(int k = centerX - radius; k<=centerX + radius; k++){
         if(k < 0 || k > result->cols || j < 0 || j > result->rows){
-          continue;
+          continue; //REMEMBER THAT ZERO IS A VALID X COORD/YCOORD
         }
 	//etc.
      	}
