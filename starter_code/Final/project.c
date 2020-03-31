@@ -107,11 +107,12 @@ int main(int argc, char *argv[]) {
   // Pointilism
   //pointilism is void 
   else if (strcmp(method, "pointilism") == 0) {
-    printf("hi\n");
+    //printf("hi\n");
     check_argc(argc, 4);
+    //printf("hi\n");
     pointilism(img);
     write_ppm(output, img);
-    printf("CHECK DELETE THIS AFTER \n");
+    printf("DONE \n");
 
   }
 
