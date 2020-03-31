@@ -8,7 +8,7 @@
 #include "ppm_io.h"
 
 
-void alpha_blending(Image *Image1, Image *Image2, float alpha){
+Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
   // check to make sure inputs are valid
   if( Image1 == NULL || Image2 == NULL || ratio == NULL){
     printf("Incorrect number of arguments\n");
@@ -233,7 +233,7 @@ void alpha_blending(Image *Image1, Image *Image2, float alpha){
       }
     }
   }
-
+  return output;
 }
 
 
