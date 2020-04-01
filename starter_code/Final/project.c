@@ -92,6 +92,7 @@ int main(int argc, char *argv[]) {
   write_ppm(output,result);
   free(result->data);
   free(result);
+  free(img2);
   }
 
   // Zoom in - returns an image
