@@ -8,45 +8,69 @@
 #include "swirl.h"
 
 
-
+//two inputs provided by user of a center (x, y) and a distortion scale are finction parameters
 void swirl (Image *img, int x_center, int y_center, int scale) {
-  int x, y, dx, dy, tx, ty;
-  double alpha, cos_a, sin_a;
 
-  Pixel *pixel_arr = malloc(sizeof(Pixel) * img->rows * img->cols);
+  //definitng all my variables that will be used, initial values will soon be changed
+  int columns_of_image = 0;
+  int rows_of_image = 0;
+  int x_coord = 0;
+  int y_coord = 0;
+  int delta_x = 0;
+  int delta_y = 0;
+  int new_x_coord = 0;
+  int new_y_coord = 0;
+  columns_of_image = columns_of_image;
+  rows_of_image = img -> rows;
 
-  for (int r = 0; r < img-> rows; ++r) {
-    for (int c = 0; c < img->cols; ++c) {
-      pixel_arr[(r * img->cols) + c].r = img->data[(r * img->cols) + c].r;
-      pixel_arr[(r * img->cols) + c].g = img->data[(r * img->cols) + c].g;
-      pixel_arr[(r * img->cols) + c].b = img->data[(r * img->cols) + c].b;
-      img->data[(r * img->cols) + c].r = 0;
-      img->data[(r * img->cols) + c].g = 0;
-      img->data[(r * img->cols) + c].b = 0;
+  double alpha = 0;
+  double cos_a = 0;
+  double sin_a = 0;
+
+  //array of pixels that will be modified 
+  Pixel *array_of_pixels = malloc(sizeof(Pixel) * rows_of_image * columns_of_image);
+
+  for (int current_row= 0; current_row < rows_of_image; ++current_row) {
+    for (int current_column = 0; current_column < columns_of_image; ++current_column) {
+
+      //array of pixels initially has all the same red, green, and blue channels as the image
+      array_of_pixels[(current_row * columns_of_image) + current_column].r = img->data[(current_row * columns_of_image) + current_column].r;
+      array_of_pixels[(current_row * columns_of_image) + current_column].g = img->data[(current_row * columns_of_image) + current_column].g;
+      array_of_pixels[(current_row * columns_of_image) + current_column].b = img->data[(current_row * columns_of_image) + current_column].b;
+      
+      //setting image with all black pixels, will be modified after
+      img->data[(current_row * columns_of_image) + current_column].r = 0;
+      img->data[(current_row * columns_of_image) + current_column].g = 0;
+      img->data[(current_row * columns_of_image) + current_column].b = 0;
 
     }
   }
 
-  for (x = 0; x < img->cols; ++x) {
-    for (y = 0; y < img->rows; ++y) {
-      dx = x - x_center;
-      dy = y - y_center;
-      alpha = sqrt(dx * dx + dy * dy) / (double) scale;
+  for (x_coord = 0; x_coord < columns_of_image; ++x_coord) {
+    for (y_coord = 0; y_coord < rows_of_image; ++y_coord) {
+
+      //implement swirl effect
+      delta_x = x_coord - x_center;
+      delta_y = y_coord - y_center;
+      alpha = sqrt(delta_x * delta_x + delta_y * delta_y) / (double) scale;
       cos_a = cos(alpha);
       sin_a = sin(alpha);
       
-      tx = (int) (dx * cos_a - dy * sin_a + x_center);
-      ty = (int) (dx * sin_a + dy * cos_a + y_center);
+      //new location of x coordinate and y coordinate
+      new_x_coord = (int) (delta_x * cos_a - delta_y * sin_a + x_center); 
+      new_y_coord = (int) (delta_x * sin_a + delta_y * cos_a + y_center); 
 
-      if (tx >= 0 && ty >= 0 && tx < img->cols && ty < img-> rows) {
-
-        img->data[(y * img->cols) + x].r = pixel_arr[(ty * img->cols) + tx].r;
-        img->data[(y * img->cols) + x].g = pixel_arr[(ty * img->cols) + tx].g;
-        img->data[(y * img->cols) + x].b = pixel_arr[(ty * img->cols) + tx].b;
+      //check to make sure new location of pixel is in the dimensions of the image
+      if (new_x_coord >= 0 && new_y_coord >= 0 && new_x_coord < columns_of_image && new_y_coord < rows_of_image) {
+        
+        //changing location of pixel from old coordinates to new coordinates
+        img->data[(y_coord * columns_of_image) + x_coord].r = array_of_pixels[(new_y_coord * columns_of_image) + new_x_coord].r;
+        img->data[(y_coord * columns_of_image) + x_coord].g = array_of_pixels[(new_y_coord * columns_of_image) + new_x_coord].g;
+        img->data[(y_coord * columns_of_image) + x_coord].b = array_of_pixels[(new_y_coord * columns_of_image) + new_x_coord].b;
 
 
       }
     }
   }
-  free(pixel_arr);
+  free(array_of_pixels);
 }

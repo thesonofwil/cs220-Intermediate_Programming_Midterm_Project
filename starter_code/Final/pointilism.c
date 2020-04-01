@@ -1,7 +1,6 @@
 //Marcelo Morales
 //lmoral10
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "ppm_io.h"
@@ -10,32 +9,28 @@
 
 void pointilism(Image *img) {
 
+  //getting the whole area of the image
   int area = img->rows * img->cols;
-  int numPixels = area * 0.03; // does this need to be random?
-  //have to fix seed?
-
-  //printf("%d %d circle", img->rows, img->cols);
-  //printf("check\n");
+  //only need to select three percent of the pixels of the input image
+  int numPixels = area * 0.03; 
+  
   for (int i = 0; i <= numPixels; i++) {
-    int x_center = rand() % img -> cols; //x coord center of circle
-    int y_center = rand() % img -> rows; //y coord center of circle
+    //selecting random x coordinate of a center of a cirlce
+    int x_center = rand() % img -> cols; 
+    //selecting random y coordinate of a center of a cirlce
+    int y_center = rand() % img -> rows; 
+    //for each randomly selected pixe, will use a random radius between 1 and 5
     int radius = rand() % 5 + 1;
-
-    //loop limit problems?
-
 
   for (int y_coord = y_center - radius; y_coord <= y_center + radius; ++y_coord) {
 
       for (int x_coord = x_center - radius; x_coord <= x_center + radius; ++x_coord) {
-          
-      
           if ( (y_coord >= 0 && y_coord < img-> rows) && (x_coord >= 0 && x_coord < img->cols) ) {
-        
+            
+            //point selected has to be inside or border the circle, satisfy equation
             if  ( pow(x_center - x_coord, 2) + pow(y_center - y_coord, 2) <= pow(radius, 2) ) {
-
-          //printf("%d %d check\n ", x_coord, y_coord);
-          //printf("%d %d check2\n", img->cols, img->rows);
-
+            
+            //apply pointilism effect by coloring all the pixels that reside in the circle with the same color as the center
             img->data[y_coord * img->cols + x_coord].r = img->data[y_center * img->cols + x_center].r;
             img->data[y_coord * img->cols + x_coord].g = img->data[y_center * img->cols + x_center].g;
             img->data[y_coord * img->cols + x_coord].b = img->data[y_center * img->cols + x_center].b;
@@ -48,31 +43,6 @@ void pointilism(Image *img) {
   }
 
 }
-
-
-/*
-    for (int y_coord = y_center - radius; y_coord <= y_center + radius; ++y_coord) { 
-      for (int x_coord = x_center - radius; x_coord <= x_center + radius; ++x_coord) {
-        if ( (y_coord >= 0 && y_coord <= img-> cols) && (x_coord >= 0 && x_coord <= img->rows) ) {
-           // printf("%d %d\n", x_coord, y_coord);
-          if  ( pow(x_center - x_coord, 2) + pow(y_center - y_coord, 2) <= pow(radius, 2) ) { 
-            //color in with center, has to satisfy equation of a circle
-          img->data[x_coord * img->cols + y_coord].r = img->data[x_center * img->cols + y_center].r;
-          img->data[x_coord * img->cols + y_coord].g = img->data[x_center * img->cols + y_center].g;
-          img->data[x_coord * img->cols + y_coord].b = img->data[x_center * img->cols + y_center].b;
-          } 
-          //color in pixel in the pixel with chosen center
-        }
-      continue;
-      }
-    
-  
-      }  
-    }
-
-    //return img;
-  }
-*/
 
 
 
