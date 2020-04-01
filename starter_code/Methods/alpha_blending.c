@@ -90,7 +90,7 @@ Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
     }
     //making the rest of the output data equal to Image 1 data
     for(int n = Image2->rows; n < output->rows; n++){
-      for(int o = Image2->cols; o < output->colss; o++){
+      for(int o = Image2->cols; o < output->cols; o++){
 	*(output.data + (n*(output->cols)+o)).r =  *(Image1.data + (n*(output->cols)+o)).r;
         *(output.data + (n*(output->cols)+o)).g =  *(Image1.data + (n*(output->cols)+o)).g;
         *(output.data + (n*(output->cols)+o)).b =  *(Image1.data + (n*(output->cols)+o)).b;
