@@ -84,8 +84,15 @@ int main(int argc, char *argv[]) {
   }  
 
   // Alpha-blend
-  //  else if (strcmp(method, "a-blend") == 0 || strcmp(method, "blend") == 0) {
-  // }
+  else if (strcmp(method, "a-blend") == 0 || strcmp(method, "blend") == 0) {
+  check_argc(argc,6);
+  float alpha = convert_parameter(argv[5]);
+  Image *img2 = argv[4];
+  Image *result = alpha_blending(img,img2,alpha);
+  write_ppm(output,result);
+  free(result->data);
+  free(result);
+  }
 
   // Zoom in - returns an image
   else if (strcmp(method, "zoom_in") == 0) {
