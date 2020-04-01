@@ -15,8 +15,6 @@
 
 #include "ppm_io.c"
 
-
-
 // Check if the number of arguments meet what is required for the manipulation
 void check_argc(int argc, int req) {
   if (argc != req) {
@@ -40,7 +38,6 @@ float convert_parameter(char *arg) {
 
 
 int main(int argc, char *argv[]) {
-  //printf("hello\n");
   char *inputFile;
   char *outputFile;
   char *method;
@@ -95,7 +92,6 @@ int main(int argc, char *argv[]) {
    check_argc(argc, 4);
    Image *result = zoom_in(img);
    write_ppm(output, result);
-   printf("CHECK DELETE THIS AFTER \n");
    free(result->data);
    free(result);
   }
@@ -107,13 +103,9 @@ int main(int argc, char *argv[]) {
   // Pointilism
   //pointilism is void 
   else if (strcmp(method, "pointilism") == 0) {
-    //printf("hi\n");
     check_argc(argc, 4);
-    //printf("hi\n");
     pointilism(img);
     write_ppm(output, img);
-    printf("DONE \n");
-
   }
 
   // Swirl
@@ -136,12 +128,8 @@ int main(int argc, char *argv[]) {
     }
 
     swirl(img, center_x, center_y, scale);
-    //Image *result = swirl(img, center_x, center_y, scale);
     write_ppm(output, img);
-    //free(result->data);
-    //free(result);
-
-
+  
   }
 
   // Blur
@@ -155,9 +143,8 @@ int main(int argc, char *argv[]) {
   }
 
   else {
-    printf("BAD\n");
     fprintf(stderr, "Error: operation name was invalid. hello \n");
-    //exit(4);
+    exit(4);
   }
 
   fclose(input);
