@@ -1,3 +1,9 @@
+commit 934223ee65d88d859e29243f93d5561ca835ef9c
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Thu Apr 2 13:37:00 2020 -0400
+
+    Added gitlog and readme
+
 commit 4228424e1535882494a2d59b666de9dc8b07d030
 Author: Marcelo <lmoral10@jhu.edu>
 Date:   Thu Apr 2 13:13:45 2020 -0400

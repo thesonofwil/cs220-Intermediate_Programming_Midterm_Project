@@ -1,52 +1,56 @@
-//Anire Egbe
-//aegbe2
+//Wilson Tjoeng
+//wtjoeng1
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "zoom_out.h"
 
-
 // 0.5X zoom i.e half as many rows and columns
-// one pixel from original is copied into a 2 x 2 square output
+// 2 x 2 pixels from input is averaged into one pixel in the output
+
+// Return the current index in the fake 2D array
+int get_index(int currentRow, int currentCol, int totalCols) {
+  return currentRow * totalCols + currentCol;
+}
+
 Image * zoom_out(Image *img) {
   Image *output = (Image *)malloc(sizeof(Image));
-  int cols = img->cols / 2;
-  int rows = img->rows / 2;
+  int cols = img->cols/2;
+  int rows = img->rows/2;
   output->cols = cols;
   output->rows = rows;
   output->data = (Pixel *)malloc(rows * cols * sizeof(Pixel));
+
+  // Initialize indices for 2 x 2 square 
+  int imgRowTop = 0;
+  int imgRowBot = 1;
   
-  //creating output image
-  for (int oRow = 0; oRow < output->rows; oRow++) {
-    for (int oCol = 0; oCol < output->cols; oCol++) {
-      //adds all the r values from the four pixels in the original image to the pixel in the output image and takes average
-      output->data[oRow*cols+oCol].r = (img->data[oRow*cols+oCol].r + img->data[oRow*cols+oCol+1].r +  img->data[(oRow+1)*cols+oCol].r +
-					img->data[(oRow+1)*cols+oCol+1].r) /4;
-      //adds all the b values from the four pixels in the original image to the pixel in the output image and takes average
+  for (int r = 0; r < rows; r++) {
+    int imgColLeft = 0;
+    int imgColRight = 1;
+    for (int c = 0; c < cols; c++) { 
+      int index = get_index(r, c, cols); // current index of output
+      
+      int topLeft = get_index(imgRowTop, imgColLeft, img->cols);
+      int topRight = get_index(imgRowTop, imgColRight, img->cols);
+      int botLeft = get_index(imgRowBot, imgColLeft, img->cols);
+      int botRight = get_index(imgRowBot, imgColRight, img->cols);
+      
+      int averageR = (img->data[topLeft].r + img->data[topRight].r + img->data[botLeft].r + img->data[botRight].r)/4;
+      int averageG = (img->data[topLeft].g + img->data[topRight].g + img->data[botLeft].g + img->data[botRight].g)/4;
+      int averageB = (img->data[topLeft].b + img->data[topRight].b + img->data[botLeft].b + img->data[botRight].b)/4;
+      
+      output->data[index].r = averageR;
+      output->data[index].g = averageG;
+      output->data[index].b = averageB;
 
-      output->data[oRow*cols+oCol].b = (img->data[oRow*cols+oCol].b + img->data[oRow*cols+oCol+1].b +  img->data[(oRow+1)*cols+oCol].b +
-                                        img->data[(oRow+1)*cols+oCol+1].b) /4;
-      //adds all the g values from the four pixels in the original image to the pixel in the output image and takes average
-
-      output->data[oRow*cols+oCol].g = (img->data[oRow*cols+oCol].g + img->data[oRow*cols+oCol+1].g +  img->data[(oRow+1)*cols+oCol].g +
-                                        img->data[(oRow+1)*cols+oCol+1].g) /4;
-
-      /* *(output->data + (oRow*output->cols + oCol)).r = *(img->data + (oRow*output->cols + oCol)).r + *(img->data + (oRow*output->cols + (oCol+1))).r
-	+ *(img->data + ( (oRow+1)*output->cols + (oCol+1))).r +   *(img->data + ( (oRow+1)*output->cols +  oCol)).r;
-      //take average of the four r pixels
-      *(output->data + (oRow*output->cols + oCol)).r = *(output->data + (oRow*output->cols + oCol)).r /4;
-      //adds all the g values from the four pixels in the original image to the pixel in the output image
-      *(output->data + (oRow*output->cols + oCol)).g = *(img->data + (oRow*output->cols + oCol)).g + *(img->data + (oRow*output->cols + (oCol+1))).g
-        + *(img->data + ( (oRow+1)*output->cols + (oCol+1))).g +   *(img->data + ( (oRow+1)*output->cols +  oCol)).g;
-      //take average of the four g pixels
-      *(output->data + (oRow*output->cols + oCol)).g = *(output->data + (oRow*output->cols + oCol)).g /4;
-      //adds all the b values from the four pixels in the original image to the pixel in the output image
-      *(output->data + (oRow*output->cols + oCol)).b = *(img->data + (oRow*output->cols + oCol)).b + *(img->data + (oRow*output->cols + (oCol+1))).b
-        + *(img->data + ( (oRow+1)*output->cols + (oCol+1))).b +   *(img->data + ( (oRow+1)*output->cols +  oCol)).b;
-      //take average of the four b pixels
-      *(output->data + (oRow*output->cols + oCol)).b = *(output->data + (oRow*output->cols + oCol)).b /4;*/
+      // Move to next columns
+      imgColLeft += 2;
+      imgColRight += 2;
     }
+    imgRowTop += 2;
+    imgRowBot += 2;
+    // Column indices will reset after this
   }
-
   return output;
 }

@@ -4,8 +4,8 @@ LDLIBS=-lm
 
 # Create the project executable
 # Add methods here
-project: project.o ppm_io.o change_exposure.o zoom_in.o blur.o pointilism.o  swirl.o zoom_out.o alpha_blending.o
-	$(CC) $(LDLIBS) -o project project.o ppm_io.o change_exposure.o zoom_in.o blur.o pointilism.o swirl.o zoom_out.o alpha_blending.o
+project: project.o ppm_io.o imageManip.o change_exposure.o zoom_in.o blur.o pointilism.o  swirl.o zoom_out.o alpha_blending.o
+	$(CC) $(LDLIBS) -o project project.o ppm_io.o imageManip.o change_exposure.o zoom_in.o blur.o pointilism.o swirl.o zoom_out.o alpha_blending.o
 
 #demo: demo_ppm.o ppm_io.o
 #	$(CC) demo_ppm.o ppm_io.o -o demo
@@ -15,6 +15,9 @@ project: project.o ppm_io.o change_exposure.o zoom_in.o blur.o pointilism.o  swi
 
 ppm_io.o: ppm_io.c ppm_io.h
 	$(CC) $(CFLAGS) -c ppm_io.c
+
+imageManip.o: imageManip.c imageManip.h
+	$(CC) $(CFLAGS) -c imageManip.c
 
 # Compile methods into their respective object files
 change_exposure.o: change_exposure.c change_exposure.h
