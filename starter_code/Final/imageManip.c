@@ -52,6 +52,10 @@ void call_method(char *method, int argc, char *argv[], Image *img, FILE *output)
   check_argc(argc,6);
   float alpha = convert_parameter(argv[5]);
   FILE *secondInput = fopen(argv[4], "rb");
+  if (!secondInput) {
+    fprintf(stderr, "Error: second input file could not be opened. \n");
+    exit(2);
+  }
   Image *img2 = read_ppm(secondInput);
   Image *result = alpha_blending(img, img2, alpha);
   write_ppm(output,result);
