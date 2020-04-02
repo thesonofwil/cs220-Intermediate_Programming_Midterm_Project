@@ -9,7 +9,7 @@
 #include "ppm_io.h"
 #include "change_exposure.h"
 #include "zoom_in.h"
-#include "alpha_blending.c"
+#include "alpha_blending.h"
 #include "zoom_out.h"
 #include "blur.h"
 #include "pointilism.h"

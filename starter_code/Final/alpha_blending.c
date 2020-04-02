@@ -4,7 +4,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "ppm_io.h"
 #include "alpha_blending.h"
 
 Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
