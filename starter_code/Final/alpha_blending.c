@@ -10,7 +10,7 @@
 
 Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
   // check to make sure inputs are valid
-  if( Image1 == NULL || Image2 == NULL || ratio == NULL){
+  /* if( Image1 == NULL || Image2 == NULL || ratio == NULL){
     printf("Incorrect number of arguments\n");
     return 5;
   }
@@ -20,7 +20,7 @@ Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
   if(alpha <= a || alpha >= b){
     printf("Ratio value is out of range\n");
     return 6;
-  }
+    }*/
   // Changing Image 1 by alpha
   int numpix1 = Image1->rows * Image1->cols; //number of pixels in Image 1
   //create a loop to change each R,G,B value in each pixel
@@ -37,10 +37,10 @@ Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
   int numpix2 = Image2->rows * Image2->cols; //number of pixels in Image 1
   //create a loop to change each R,G,B value in each pixel
   float alpha1 = 1 - alpha;
-  for(int j = 0; j < numpix2; i++){
-    Image2->data[i].r = Image2->data[i].r * alpha;
-    Image2->data[i].g = Image2->data[i].g * alpha;
-    Image2->data[i].b = Image2->data[i].b * alpha;
+  for(int j = 0; j < numpix2; j++){
+    Image2->data[i].r = Image2->data[i].r * alpha1;
+    Image2->data[i].g = Image2->data[i].g * alpha1;
+    Image2->data[i].b = Image2->data[i].b * alpha1;
 
     /* *(Image2.data + j).r = *(Image2.data + j).r * alpha1;
     *(Image2.data + j).g = *(Image2.data + j).g * alpha1;
@@ -66,11 +66,11 @@ Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
   //create new data array based on new dimensions for output image
   output->data = (Pixel *) malloc( output->rows * output->cols * sizeof(Pixel));
   int cols1 = Image1->cols;
-  int rows1 = Image1->rows;
+  //int rows1 = Image1->rows;
   int cols2 = Image1->cols;
-  int rows2 = Image2->rows;
+  //int rows2 = Image2->rows;
   int ocols = output->cols;
-  int orows = output->rows;
+  //int orows = output->rows;
 
   //case1
   if( (output->rows == Image1->rows) && (output->cols == Image1->cols)){
