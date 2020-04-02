@@ -22,21 +22,29 @@ Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
     return 6;
   }
   // Changing Image 1 by alpha
-  numpix1 = Image1->rows * Image1->cols; //number of pixels in Image 1
+  int numpix1 = Image1->rows * Image1->cols; //number of pixels in Image 1
   //create a loop to change each R,G,B value in each pixel
   for(int i = 0; i < numpix1; i++){
-    *(Image1.data + i).r = *(Image1.data + i).r * alpha;
+    Image1->data[i].r = Image1->data[i].r * alpha;
+    Image1->data[i].g = Image1->data[i].g * alpha;
+    Image1->data[i].b = Image1->data[i].b * alpha;
+    
+    /* *(Image1.data + i).r = *(Image1.data + i).r * alpha;
     *(Image1.data + i).g = *(Image1.data + i).g * alpha;
-    *(Image1.data + i).b = *(Image1.data + i).b * alpha;
+    *(Image1.data + i).b = *(Image1.data + i).b * alpha;*/
   }
   // Changing Image 2 by 1 - alpha
-  numpix2 = Image2->rows * Image2->cols; //number of pixels in Image 1
+  int numpix2 = Image2->rows * Image2->cols; //number of pixels in Image 1
   //create a loop to change each R,G,B value in each pixel
   float alpha1 = 1 - alpha;
-  for(int j = 0; i < numpix2; i++){
-    *(Image2.data + j).r = *(Image2.data + j).r * alpha1;
+  for(int j = 0; j < numpix2; i++){
+    Image2->data[i].r = Image2->data[i].r * alpha;
+    Image2->data[i].g = Image2->data[i].g * alpha;
+    Image2->data[i].b = Image2->data[i].b * alpha;
+
+    /* *(Image2.data + j).r = *(Image2.data + j).r * alpha1;
     *(Image2.data + j).g = *(Image2.data + j).g * alpha1;
-    *(Image2.data + j).b = *(Image2.data + j).b * alpha1;
+    *(Image2.data + j).b = *(Image2.data + j).b * alpha1;*/
   }
   //create output Image
 
@@ -196,7 +204,7 @@ Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
         *(output.data + (n*(Image1->cols)+o)).b =  *(Image1.data + (n*(Image1->cols)+o)).b;*/
       }
       //makiing the rest of the cols in output data equal to Image 2 data
-      for(int p = Image1->cols; p < output->cols; o++){
+      for(int p = Image1->cols; p < output->cols; p++){
 	output->data[n*ocols+p].r = Image2->data[n*ocols+p].r;
         output->data[n*ocols+p].g = Image2->data[n*ocols+p].g;
         output->data[n*ocols+p].b = Image2->data[n*ocols+p].b;
@@ -252,7 +260,7 @@ Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
 	  }*/
       }
        //makes sure all the data in the columns for the overlapping rows are equal to image1
-      for(int m = Image2->cols; m < output->cols, m++){
+      for(int m = Image2->cols; m < output->cols; m++){
 	output->data[k*ocols+m].r = Image1->data[k*ocols+m].r;
         output->data[k*ocols+m].g = Image1->data[k*ocols+m].g;
         output->data[k*ocols+m].b = Image1->data[k*ocols+m].b;
@@ -331,7 +339,7 @@ Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
 	  }*/
       }
       //makes sure all the data in the columns for the overlapping rows are equal to image2
-      for(int m = Image1->cols; m < output->cols, m++){
+      for(int m = Image1->cols; m < output->cols; m++){
 	output->data[k*ocols+m].r = Image2->data[k*ocols+m].r;
         output->data[k*ocols+m].g = Image2->data[k*ocols+m].g;
         output->data[k*ocols+m].b = Image2->data[k*ocols+m].b;
@@ -343,7 +351,7 @@ Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
     }
      //making the rest of the output data equal to Image 2 data
     for(int n = Image1->rows; n < output->rows; n++){
-      for(int o = Image1->cols; o < output->colss; o++){
+      for(int o = Image1->cols; o < output->cols; o++){
 	output->data[n*ocols+o].r = Image2->data[n*ocols+o].r;
         output->data[n*ocols+o].g = Image2->data[n*ocols+o].g;
         output->data[n*ocols+o].b = Image2->data[n*ocols+o].b;
