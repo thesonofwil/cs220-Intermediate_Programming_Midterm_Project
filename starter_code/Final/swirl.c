@@ -10,7 +10,6 @@
 
 //two inputs provided by user of a center (x, y) and a distortion scale are finction parameters
 void swirl (Image *img, int x_center, int y_center, int scale) {
-  printf("check first\n");
   //definitng all my variables that will be used
 
   int x_coord;
