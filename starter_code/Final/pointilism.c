@@ -14,7 +14,7 @@ void pointilism(Image *img) {
   //only need to select three percent of the pixels of the input image
   int numPixels = area * 0.03; 
   
-  for (int i = 0; i <= numPixels; i++) {
+  for (int i = 0; i < numPixels; i++) {
     //selecting random x coordinate of a center of a cirlce
     int x_center = rand() % img -> cols; 
     //selecting random y coordinate of a center of a cirlce
