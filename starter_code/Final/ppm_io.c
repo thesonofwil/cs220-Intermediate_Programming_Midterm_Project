@@ -58,7 +58,7 @@ Image * read_ppm(FILE *fp) {
   image->cols = columns;
   image->rows = rows;
 
-  if (cols < 0 || rows < 0) {
+  if (columns < 0 || rows < 0) {
     fprintf(stderr, "Error: number of rows and columns must be a positive integer. \n");
     exit(3);
   }
