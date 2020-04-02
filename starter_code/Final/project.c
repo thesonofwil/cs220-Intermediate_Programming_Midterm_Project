@@ -15,7 +15,6 @@
 #include "pointilism.h"
 #include "swirl.h"
 
-//#include "ppm_io.c"
 
 // Check if the number of arguments meet what is required for the manipulation
 void check_argc(int argc, int req) {
