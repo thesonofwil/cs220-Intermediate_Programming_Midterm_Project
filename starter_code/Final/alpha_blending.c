@@ -65,7 +65,7 @@ Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
   output->data = (Pixel *) malloc( output->rows * output->cols * sizeof(Pixel));
   int cols1 = Image1->cols;
   //int rows1 = Image1->rows;
-  int cols2 = Image1->cols;
+  int cols2 = Image2->cols;
   //int rows2 = Image2->rows;
   int ocols = output->cols;
   //int orows = output->rows;
