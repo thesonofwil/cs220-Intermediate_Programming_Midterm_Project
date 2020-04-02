@@ -1,5 +1,5 @@
 // Anire Egbe, Wilson Tjoeng, Marelo Morales
-// , wtjoeng1
+// aegbe2, wtjoeng1, lmoral10
 
 // ppm_io.c
 // 601.220, Spring 2019
