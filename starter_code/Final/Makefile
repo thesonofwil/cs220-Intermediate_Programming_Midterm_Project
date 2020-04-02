@@ -7,11 +7,8 @@ LDLIBS=-lm
 project: project.o ppm_io.o imageManip.o change_exposure.o zoom_in.o blur.o pointilism.o  swirl.o zoom_out.o alpha_blending.o
 	$(CC) $(LDLIBS) -o project project.o ppm_io.o imageManip.o change_exposure.o zoom_in.o blur.o pointilism.o swirl.o zoom_out.o alpha_blending.o
 
-#demo: demo_ppm.o ppm_io.o
-#	$(CC) demo_ppm.o ppm_io.o -o demo
-
-#demo_ppm.o: demo_ppm.c ppm_io.h
-#	$(CC) $(CFLAGS) -c demo_ppm.c
+project.o: project.c
+	$(CC) $(CFLAGS) -c project.c
 
 ppm_io.o: ppm_io.c ppm_io.h
 	$(CC) $(CFLAGS) -c ppm_io.c
