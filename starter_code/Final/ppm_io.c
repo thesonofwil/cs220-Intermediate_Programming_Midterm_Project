@@ -1,4 +1,4 @@
-// Anire Egbe, Wilson Tjoeng
+// Anire Egbe, Wilson Tjoeng, Marelo Morales
 // , wtjoeng1
 
 // ppm_io.c
