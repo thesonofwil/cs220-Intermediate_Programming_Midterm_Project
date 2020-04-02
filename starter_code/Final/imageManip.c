@@ -99,15 +99,19 @@ void call_method(char *method, int argc, char *argv[], Image *img, FILE *output)
     int center_x = (int)convert_parameter(argv[4]);  //truncating float to int
     int center_y = (int)convert_parameter(argv[5]);  //truncating float to int
 
-    //center_x and center_y cannot be ouside of image
-    if (center_x >  img->rows || center_y > img->cols ) {
+    //center_x and center_y cannot be ouside of image, center x and center y cannot be negative but can be zero
+    if (center_x >  img->rows || center_y > img->cols) {
       fprintf(stderr, "Error: center of image has to be inside the image \n");
+      exit(6);
+    }
+    if ( center_x < 0 || center_y < 0 ) {
+      fprintf(stderr, "Error: x coordinate or the y coordinate of the center of swirl cannot be negative \n");
       exit(6);
     }
 
     //distortion scale should be a positive integer
     if ((int)scale <= 0) { 
-      fprintf(stderr, "Error: center of image has to be inside the image \n");
+      fprintf(stderr, "Error: distortion strenght cannot be negative  \n");
       exit(6);
     }
 
