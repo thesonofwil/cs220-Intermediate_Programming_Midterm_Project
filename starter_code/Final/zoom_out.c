@@ -7,7 +7,7 @@
 
 
 // 0.5X zoom i.e half as many rows and columns
-// one pixel from original is copied into a 2 x 2 square output
+// 2 x 2 pixels from input is averaged into one pixel in the output
 
 // Return the current index in the fake 2D array
 int get_index(int currentRow, int currentCol, int totalCols) {
