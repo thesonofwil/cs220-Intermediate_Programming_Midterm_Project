@@ -78,22 +78,13 @@ Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
       for(int l = 0; l < Image2->cols; l++){
 	//combine R values from image1 & image2 into output image
 	output->data[k*cols2+1].r = Image1->data[k*cols2+1].r + Image2->data[k*cols2+1].r;
-	//makes sure all r values are max 255
-	if (output->data[k*cols2+1].r > 255) {
-          output->data[k*cols2+1].r = 255;
-	}
+   
 	 //combine g values from image1 & image2 into output image
         output->data[k*cols2+1].g = Image1->data[k*cols2+1].g + Image2->data[k*cols2+1].g;
-        //makes sure all g values are max 255
-        if (output->data[k*cols2+1].g > 255) {
-          output->data[k*cols2+1].g = 255;
-        }
+  
 	 //combine b values from image1 & image2 into output image
         output->data[k*cols2+1].b = Image1->data[k*cols2+1].b + Image2->data[k*cols2+1].b;
         //makes sure all b values are max 255
-        if (output->data[k*cols2+1].b > 255) {
-          output->data[k*cols2+1].b = 255;
-        }
 
 
 	/**(output.data + (k*(Image2->cols)+l)).r =  *(Image1.data + (k*(Image2->cols)+l)).r +  *(Image2.data + (k*(Image2->cols)+l)).r;
@@ -144,22 +135,10 @@ Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
       for(int l = 0; l < Image1->cols; l++){
 	//combine R values from image1 & image2 into output image
         output->data[k*cols1+1].r = Image1->data[k*cols1+1].r + Image2->data[k*cols1+1].r;
-        //makes sure all r values are max 255
-        if (output->data[k*cols1+1].r > 255) {
-          output->data[k*cols1+1].r = 255;
-        }
          //combine g values from image1 & image2 into output image
         output->data[k*cols1+1].g = Image1->data[k*cols1+1].g + Image2->data[k*cols1+1].g;
-        //makes sure all g values are max 255
-        if (output->data[k*cols1+1].g > 255) {
-          output->data[k*cols1+1].g = 255;
-        }
          //combine b values from image1 & image2 into output image
         output->data[k*cols1+1].b = Image1->data[k*cols1+1].b + Image2->data[k*cols1+1].b;
-        //makes sure all b values are max 255
-        if (output->data[k*cols1+1].b > 255) {
-          output->data[k*cols1+1].b = 255;
-        }
 
         //combine R values from image1 & image2 into output image
 	/*  *(output.data + (k*(Image1->cols)+l)).r =  *(Image1.data + (k*(Image1->cols)+l)).r +  *(Image2.data + (k*(Image1->cols)+l)).r;
@@ -223,22 +202,10 @@ Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
       for(int l = 0; l < Image2->cols; l++){
 	//combine R values from image1 & image2 into output image
         output->data[k*cols2+1].r = Image1->data[k*cols2+1].r + Image2->data[k*cols2+1].r;
-        //makes sure all r values are max 255
-        if (output->data[k*cols2+1].r > 255) {
-          output->data[k*cols2+1].r = 255;
-        }
          //combine g values from image1 & image2 into output image
         output->data[k*cols2+1].g = Image1->data[k*cols2+1].g + Image2->data[k*cols2+1].g;
-        //makes sure all g values are max 255
-        if (output->data[k*cols2+1].g > 255) {
-          output->data[k*cols2+1].g = 255;
-        }
          //combine b values from image1 & image2 into output image
         output->data[k*cols2+1].b = Image1->data[k*cols2+1].b + Image2->data[k*cols2+1].b;
-        //makes sure all b values are max 255
-        if (output->data[k*cols2+1].b > 255) {
-          output->data[k*cols2+1].b = 255;
-        }
 
         //combine R values from image1 & image2 into output image
         /**(output.data + (k*(Image2->cols)+l)).r =  *(Image1.data + (k*(Image2->cols)+l)).r +  *(Image2.data + (k*(Image2->cols)+l)).r;
@@ -302,22 +269,11 @@ Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
       for(int l = 0; l < Image1->cols; l++){
 	//combine R values from image1 & image2 into output image
         output->data[k*cols1+1].r = Image1->data[k*cols1+1].r + Image2->data[k*cols1+1].r;
-        //makes sure all r values are max 255
-        if (output->data[k*cols1+1].r > 255) {
-          output->data[k*cols1+1].r = 255;
-        }
          //combine g values from image1 & image2 into output image
         output->data[k*cols1+1].g = Image1->data[k*cols1+1].g + Image2->data[k*cols1+1].g;
-        //makes sure all g values are max 255
-        if (output->data[k*cols1+1].g > 255) {
-          output->data[k*cols1+1].g = 255;
-        }
          //combine b values from image1 & image2 into output image
         output->data[k*cols1+1].b = Image1->data[k*cols1+1].b + Image2->data[k*cols1+1].b;
         //makes sure all b values are max 255
-        if (output->data[k*cols1+1].b > 255) {
-          output->data[k*cols1+1].b = 255;
-        }
 
         //combine R values from image1 & image2 into output image
 	/* *(output.data + (k*(Image1->cols)+l)).r =  *(Image1.data + (k*(Image1->cols)+l)).r +  *(Image2.data + (k*(Image1->cols)+l)).r;
