@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
 
   // Check if operation was given
   if (argc == 3) {
-    fprintf(stderr, "Error: No operation name was specified. \n");
+    fprintf(stderr, "Error: no operation name was specified. \n");
     exit(4);
   }
   method = argv[3];
@@ -85,16 +85,17 @@ int main(int argc, char *argv[]) {
   }  
 
   // Alpha-blend
-  else if (strcmp(method, "a-blend") == 0 || strcmp(method, "blend") == 0) {
+  else if (strcmp(method, "blend") == 0) {
   check_argc(argc,6);
   float alpha = convert_parameter(argv[5]);
   FILE *secondInput = fopen(argv[4], "rb");
   Image *img2 = read_ppm(secondInput);
-  Image *result = alpha_blending(img,img2,alpha);
+  Image *result = alpha_blending(img, img2, alpha);
   write_ppm(output,result);
   fclose(secondInput);
   free(result->data);
   free(result);
+  free(img2->data);
   free(img2);
   }
 
@@ -133,13 +134,13 @@ int main(int argc, char *argv[]) {
 
     //center_x and center_y cannot be ouside of image
     if (center_x >  img->rows || center_y > img->cols ) {
-      fprintf(stderr, "Error: Center of image has to be inside the image \n");
+      fprintf(stderr, "Error: center of image has to be inside the image \n");
       exit(6);
     }
 
     //distortion scale should be a positive integer
     if ((int)scale <= 0) { 
-      fprintf(stderr, "Error: Center of image has to be inside the image \n");
+      fprintf(stderr, "Error: center of image has to be inside the image \n");
       exit(6);
     }
 
@@ -159,7 +160,7 @@ int main(int argc, char *argv[]) {
   }
 
   else {
-    fprintf(stderr, "Error: operation name was invalid. hello \n");
+    fprintf(stderr, "Error: operation name was invalid. \n");
     exit(4);
   }
 
