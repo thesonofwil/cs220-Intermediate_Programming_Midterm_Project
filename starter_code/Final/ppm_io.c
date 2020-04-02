@@ -57,6 +57,12 @@ Image * read_ppm(FILE *fp) {
 
   image->cols = columns;
   image->rows = rows;
+
+  if (cols < 0 || rows < 0) {
+    fprintf(stderr, "Error: number of rows and columns must be a positive integer. \n");
+    exit(3);
+  }
+  
   image->data = (Pixel *)calloc(columns * rows + 1, sizeof(Pixel)); // array to hold rgb
   // +1 fixes valgrind issues somehow(?)
   
