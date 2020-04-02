@@ -38,9 +38,9 @@ Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
   //create a loop to change each R,G,B value in each pixel
   float alpha1 = 1 - alpha;
   for(int j = 0; j < numpix2; j++){
-    Image2->data[i].r = Image2->data[i].r * alpha1;
-    Image2->data[i].g = Image2->data[i].g * alpha1;
-    Image2->data[i].b = Image2->data[i].b * alpha1;
+    Image2->data[j].r = Image2->data[j].r * alpha1;
+    Image2->data[j].g = Image2->data[j].g * alpha1;
+    Image2->data[j].b = Image2->data[j].b * alpha1;
 
     /* *(Image2.data + j).r = *(Image2.data + j).r * alpha1;
     *(Image2.data + j).g = *(Image2.data + j).g * alpha1;
@@ -115,7 +115,7 @@ Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
 	  }*/
       }
       //makes sure all the data in the columns for the overlapping rows are equal to image1
-      for(int m = Image2->cols; m < output->cols, m++){
+      for(int m = Image2->cols; m < output->cols; m++){
 	output->data[k*ocols+m].r = Image1->data[k*ocols+m].r;
 	output->data[k*ocols+m].g = Image1->data[k*ocols+m].g;
         output->data[k*ocols+m].b = Image1->data[k*ocols+m].b;
@@ -181,7 +181,7 @@ Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
 	  }*/
       }
        //makes sure all the data in the columns for the overlapping rows are equal to image2
-      for(int m = Image1->cols; m < output->cols, m++){
+      for(int m = Image1->cols; m < output->cols; m++){
 	output->data[k*ocols+m].r = Image2->data[k*ocols+m].r;
         output->data[k*ocols+m].g = Image2->data[k*ocols+m].g;
         output->data[k*ocols+m].b = Image2->data[k*ocols+m].b;
@@ -283,7 +283,7 @@ Image *alpha_blending(Image *Image1, Image *Image2, float alpha){
         *(output.data + (n*(Image1->cols)+o)).b =  *(Image2.data + (n*(Image1->cols)+o)).b;*/
       }
       //makiing the rest of the cols in output data equal to Image 1 data
-      for(int p = Image2->cols; p < output->cols; o++){
+      for(int p = Image2->cols; p < output->cols; p++){
 	output->data[n*ocols+p].r = Image1->data[n*ocols+p].r;
         output->data[n*ocols+p].g = Image1->data[n*ocols+p].g;
         output->data[n*ocols+p].b = Image1->data[n*ocols+p].b;
