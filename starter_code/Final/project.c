@@ -13,7 +13,7 @@
 #include "pointilism.h"
 #include "swirl.h"
 
-#include "ppm_io.c"
+//#include "ppm_io.c"
 
 // Check if the number of arguments meet what is required for the manipulation
 void check_argc(int argc, int req) {
@@ -87,9 +87,11 @@ int main(int argc, char *argv[]) {
   else if (strcmp(method, "a-blend") == 0 || strcmp(method, "blend") == 0) {
   check_argc(argc,6);
   float alpha = convert_parameter(argv[5]);
-  Image *img2 = argv[4];
+  FILE *secondInput = fopen(argv[4], "rb");
+  Image *img2 = read_ppm(secondInput);
   Image *result = alpha_blending(img,img2,alpha);
   write_ppm(output,result);
+  fclose(secondInput);
   free(result->data);
   free(result);
   free(img2);
