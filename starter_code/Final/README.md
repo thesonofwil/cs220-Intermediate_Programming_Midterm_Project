@@ -2,3 +2,5 @@ Wilson Tjoeng, Anire Egbe, Marcelo Morales
 wtjoeng1, aegbe2, lmoral10
 
 601.220.05 Intermediate Programming - Midterm Project
+
+This program is an image manipulation program similar to Photoshop. The project reads an image file from disk in ppm format, peforms of seven image manipulation operations, and writes the result back to disk as a new image file. The seven image operations are exposure, alpha-blend, zoom in, zoom out, pointilism, and blur. Exposure modifies the exposure of an image. The alpha blend operation blends two images into one using a given blend ratio. Zoom in allows us to zoom into the inputted ppm file. Zoom out allows us to zoom out of an image, the reverse of zoom in. Pointilism outputs the ppm file as a "painting," with disntinct color dots. Swirl is an image warping operation, whcih changes the locations of some or all pixels. Finally, blur is an image opration which like the name states, blurs the image by taking each pixel in the image and setting its value to some kind of average of all the pixels in a small neighborhood around it.
