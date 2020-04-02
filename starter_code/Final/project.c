@@ -9,6 +9,7 @@
 #include "ppm_io.h"
 #include "change_exposure.h"
 #include "zoom_in.h"
+#include "alpha_blending.h"
 #include "zoom_out.h"
 #include "blur.h"
 #include "pointilism.h"
@@ -110,7 +111,7 @@ int main(int argc, char *argv[]) {
   // Zoom out - returns an image
   else if (strcmp(method, "zoom_out") == 0) {
    check_argc(argc, 4);
-   Image *result = zoom_in(img);
+   Image *result = zoom_out(img);
    write_ppm(output, result);
    free(result->data);
    free(result);
