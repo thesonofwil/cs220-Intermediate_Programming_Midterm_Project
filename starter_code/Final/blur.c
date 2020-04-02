@@ -204,6 +204,7 @@ void convolve_all(Image *originalImage, Image *output, double *filter, double si
 Image *blur(Image *img, double sigma) {
   if (sigma < 0) {
     fprintf(stderr, "Error: Sigma must be a positive number. \n");
+    exit(6);
   }
   
   Image *copyToBeBlurred = copy_image(img);  
