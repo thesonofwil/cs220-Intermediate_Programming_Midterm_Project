@@ -1,0 +1,829 @@
+commit 4228424e1535882494a2d59b666de9dc8b07d030
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Thu Apr 2 13:13:45 2020 -0400
+
+    added read me
+
+commit d564bfc4d225d259736f27beeafe78f992e04eaa
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Thu Apr 2 13:01:49 2020 -0400
+
+    Name changes
+
+commit 693fffa1957e955b721c6660d73d468773bd8075
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Thu Apr 2 12:52:25 2020 -0400
+
+    swirl debug
+
+commit 80384d56b635301df0d2c4d547ac0b17a97ea4a3
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Thu Apr 2 12:49:07 2020 -0400
+
+    fixed bug with swirl
+
+commit 3ea53a23c8298f7b08aa0f96c762f8384b793660
+Merge: f1a8540 cccedd9
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Thu Apr 2 10:53:29 2020 -0400
+
+    Merge branch 'master' of https://bitbucket.org/thesonofwil/midterm-project
+
+commit f1a854089c98bce61ef51e271b2c05b73ec141d9
+Merge: 66553ef a46a1f8
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Thu Apr 2 10:53:09 2020 -0400
+
+    project
+
+commit cccedd98a4cdbf13aa39e01ada31cb38f3f9d79f
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Thu Apr 2 10:47:14 2020 -0400
+
+    Added readme file
+
+commit 66553ef2410186e9f055290a9847063924ee08da
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Thu Apr 2 10:46:07 2020 -0400
+
+    communicate
+
+commit a46a1f8e24d4addc1676bbe4e3e5de6341ccd1b0
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Thu Apr 2 10:37:30 2020 -0400
+
+    New object file for zoom out
+
+commit 3d38c52bf32f31d3b617fad8627b8e30f4652138
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Thu Apr 2 10:31:42 2020 -0400
+
+    Rewrote alpha blend
+
+commit 8ea72642c5e9889d1f5be295a226c59b9f4ceb94
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Thu Apr 2 09:44:32 2020 -0400
+
+    Fixed compiling issues
+
+commit dfccc76987955e54a21a236ffa3d22ee783f49f7
+Merge: cd7299d 28de2b5
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Thu Apr 2 00:04:13 2020 -0400
+
+    comminica
+
+commit cd7299d2c1e45c54337d7d05bf5b6b8dec302cb4
+Merge: 1676695 f6ed512
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Thu Apr 2 00:02:25 2020 -0400
+
+    done
+
+commit 28de2b57ec389e7bcd0ba155221f185f0bee31f1
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Thu Apr 2 00:01:30 2020 -0400
+
+    Fixed zoom_out
+
+commit f6ed5128096e393d93258d886d0842246f43874d
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Wed Apr 1 23:58:55 2020 -0400
+
+    Fixed zoom_out
+
+commit 1676695edf06dba89ad41c57aaf8ba1bde47432f
+Merge: cd76dba c09cdad
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Wed Apr 1 23:34:37 2020 -0400
+
+    merge
+
+commit c09cdadda7bcd8ced5fe44fa461ce15ee8eb4f6f
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Wed Apr 1 23:16:46 2020 -0400
+
+    small error
+
+commit cd76dba91d98424597e1078bb0fd8ea871be0525
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Wed Apr 1 23:14:57 2020 -0400
+
+    communicate
+
+commit 70f750d01a92dc964544f56e2fa331ddd2193a79
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Wed Apr 1 23:02:26 2020 -0400
+
+    compiling fixes
+
+commit dbabd9714281a61849b092ae717b8229c095284c
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Wed Apr 1 22:51:04 2020 -0400
+
+    removed ppm_io.c
+
+commit 5df610d3707e134ee6b03a755f207027b1afda21
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Wed Apr 1 22:45:54 2020 -0400
+
+    added alpha blend header file
+
+commit da6f186d59f83dda7219355dca846f48071ba63e
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Wed Apr 1 22:31:32 2020 -0400
+
+    got rid of if statements
+
+commit e7eb92cc412351211da4dcd4efa3699979fae694
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Wed Apr 1 22:17:36 2020 -0400
+
+    minor fix
+
+commit e48b72610418c2962a8ff3942829ecaed879c8e7
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Wed Apr 1 22:09:21 2020 -0400
+
+    more changes to alpha
+
+commit 6eb7456425b61f371d3758c370abc12f00bc16bc
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Wed Apr 1 21:57:07 2020 -0400
+
+    more changes to alpha blend
+
+commit 1360b5b55eeaefee502a9a13460540c7186dee86
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Wed Apr 1 21:55:55 2020 -0400
+
+    header file for alpha blend
+
+commit 04c82ffa2dfc1605a0835db7f1dd9163cfdab496
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Wed Apr 1 21:42:24 2020 -0400
+
+    more changes to alpha blend
+
+commit 69a54c23f96ca355737ef16dcedfbfd50fc4e9ad
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Wed Apr 1 21:36:23 2020 -0400
+
+    Included zoom_out.h
+
+commit 98fd7ddf971916667e554e55a5ff429f2a48f4ca
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Wed Apr 1 21:27:25 2020 -0400
+
+    added header file
+
+commit 1d0f7325f6c0e357ed6321960df311442dc51679
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Wed Apr 1 21:24:02 2020 -0400
+
+    Fixed blending integration
+
+commit c8e0a7c92660f0fdb867fb0cf54f24fe839e46e3
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Wed Apr 1 21:11:17 2020 -0400
+
+    new alpha blend fcn
+
+commit 030b8803389672301aa9ef2fe47774ed12135adf
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Wed Apr 1 17:56:01 2020 -0400
+
+    new changes to zoom out
+
+commit af13c1589736f2cd2bcc2f91fcf1e73ea92a22eb
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Wed Apr 1 16:36:33 2020 -0400
+
+    fixed -> error in zoom out
+
+commit fc3e19a8a5d03461acded3e320e5c7d482e6d1fb
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Wed Apr 1 14:48:31 2020 -0400
+
+    added header file
+
+commit 3d27bec59bd8bc3976527b91df0cbf1ca5e567bd
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Wed Apr 1 14:18:51 2020 -0400
+
+    fixed alpha and zoom out in Makefile
+
+commit c339f9d8e205941af9c38f50326f5912c9f747cf
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Wed Apr 1 13:18:13 2020 -0400
+
+    freed second image for alpha
+
+commit ebadbc8cfd6d78866519953fd45d999b39de3cde
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Wed Apr 1 12:18:23 2020 -0400
+
+    added alpha blend to project c
+
+commit 517037a8095dc2abac881f12fe6f9c4fc029c75d
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Wed Apr 1 11:35:35 2020 -0400
+
+    added zoom out
+
+commit 27b92cbba1d55e29cf1c9bc384e8cbbacd468f8e
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Wed Apr 1 11:30:13 2020 -0400
+
+    added alpha blend and zoom out
+
+commit d84fdca667f9446231c591e61c2842f450ab571d
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Wed Apr 1 09:38:01 2020 -0400
+
+    fixed typo
+
+commit 5d176f656c19836fb0440282e8708fabab79ffbc
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Tue Mar 31 23:37:38 2020 -0400
+
+    hopefully working zoom_out
+
+commit ef2e3ab55ab2fadb39179399b554e0add2fdc5e5
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Tue Mar 31 23:36:47 2020 -0400
+
+    header file for zoom_out
+
+commit 58f2d140cd5d9aae0847a01e6dc0ad8923db455c
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Tue Mar 31 21:33:36 2020 -0400
+
+    erased comments and tests in project.c
+
+commit 3e9c296e9258942a845f2930c86adf2f5af03b3c
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Tue Mar 31 21:26:18 2020 -0400
+
+    clean up, add comments for explanation
+
+commit 07188f946b554815d75c94bb38d80be8ea1e193d
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Tue Mar 31 18:51:25 2020 -0400
+
+    added header file
+
+commit 420bbbfad6adc1a34ad1fdf5b8e22540999c7c2e
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Tue Mar 31 18:35:34 2020 -0400
+
+    header file for alpha blend
+
+commit d48794b665b70f42079a4e44a74bb4d9f59f5e51
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Tue Mar 31 18:35:07 2020 -0400
+
+    done with alpha blend
+
+commit ace206d8435016e36ec874b6e3dbc64a7982b632
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Tue Mar 31 17:46:08 2020 -0400
+
+    work
+
+commit 592c4dfd23bdf1f1bbd817feacf6ef26f653e7f3
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Tue Mar 31 16:44:19 2020 -0400
+
+    we are getting there with pointilism...
+
+commit 75055af4a336857855b7dc665f20f965b13ef38a
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Tue Mar 31 14:16:58 2020 -0400
+
+    galfway done thru pointilism??, not all dots are being colored :(
+
+commit c374cd81df3aa1271e3549c69e6857b5761712c1
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Tue Mar 31 13:40:43 2020 -0400
+
+    added all cases to alpha blending function
+
+commit 9c18bc35e38255c08dd421c39bccb828c250c6ea
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Tue Mar 31 13:09:52 2020 -0400
+
+    swirl passed tests with various image inputs, correct output
+
+commit f817f612bf0443d195915e9e0a8c2cca15fa793d
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Tue Mar 31 12:47:02 2020 -0400
+
+    functioning swirl
+
+commit ed787e877de60e9ccb6ac284042ede0fe4c7b2f9
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Tue Mar 31 10:15:58 2020 -0400
+
+    Debugging
+
+commit b66d4056c515a67e6640294369171b127ea80f16
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Tue Mar 31 10:03:29 2020 -0400
+
+    debugging
+
+commit 032cd16990f9938357c29e9bde4d9919bb67c32b
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Tue Mar 31 00:31:36 2020 -0400
+
+    fixed project executable bug finally
+
+commit d5c503da68b228035c3c2d712b9298f4d528b864
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Mon Mar 30 22:51:44 2020 -0400
+
+    linking swirl and pointilism to project.c executable
+
+commit 0f9ed475199a08d88582b1f465882910f564462d
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Mon Mar 30 22:29:42 2020 -0400
+
+    workking on methods/debugging
+
+commit da6a40f62b4a4726341ac495a8cbb1f13269ecab
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Mon Mar 30 21:15:43 2020 -0400
+
+    work on pointilism method
+
+commit 85bc225787a119e7a66e63d0062e3fa3660b04f3
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Mon Mar 30 20:25:32 2020 -0400
+
+    working in pointilism
+
+commit 066c8d37de7ddb2bc0e2911026c67bf6fa0ae1ea
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Mon Mar 30 20:23:08 2020 -0400
+
+    work on pointilism
+
+commit 0cb6032bf32e5f5e98ea7ab6ea9c45826fa6baa4
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Mon Mar 30 18:37:08 2020 -0400
+
+    modified header files
+
+commit 3e9cfce4fc37e62f0c045bf6bbfeebe8f08b1bd3
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Mon Mar 30 01:47:32 2020 -0400
+
+    work
+
+commit 95e6ab98ecd560fb4734d70d42e87adc0425c2b7
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Sun Mar 29 23:11:04 2020 -0400
+
+    more work
+
+commit cd6cac32a15e06128da3d1546a832b900b34cebf
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Sun Mar 29 18:56:28 2020 -0400
+
+    linking swirl to project.c
+
+commit 2d1e92ef18479ff0c8dc2f669fc8728fd423495a
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Sun Mar 29 18:10:31 2020 -0400
+
+    working on methods for project
+
+commit c8489781999b6a08a9c4098d18f0bc3faf868a15
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Sun Mar 29 17:23:49 2020 -0400
+
+    debugging
+
+commit 9646d19ff014c4a87276296486b04fb7b42069ed
+Merge: 307a6c3 94acbfe
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Sun Mar 29 14:42:09 2020 -0400
+
+    Merge branch 'master' of https://bitbucket.org/thesonofwil/midterm-project
+
+commit 307a6c3e3a18d28ce4161c16d2babb76058f4944
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Sun Mar 29 14:41:06 2020 -0400
+
+    work on methods
+
+commit 94acbfebd6109a38a9afbdfa2ce8e0474d6f4783
+Merge: 8864be7 57b9ce9
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Sun Mar 29 14:39:34 2020 -0400
+
+    Merge branch 'master' of https://bitbucket.org/thesonofwil/midterm-project
+
+commit 8864be76a66580d1a441da91206fefdd922ddcc9
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Sun Mar 29 14:39:22 2020 -0400
+
+    New changes o alpha blending
+
+commit 57b9ce985029e9f5409f447642fccfb46dd6fb3a
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Fri Mar 27 19:17:07 2020 -0400
+
+    Fixed Valgrind issues. Now waiting for Anire and Marecelo.
+
+commit 0a0cdb485e738b2a08ba15d908d097ad618563e4
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Fri Mar 27 19:16:32 2020 -0400
+
+    Fixed Valgrind issues. Now waiting for Anire and Marecelo.
+
+commit 018f507714423083193c6d633664a5a23c5457ea
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Fri Mar 27 17:24:56 2020 -0400
+
+    Minor changes
+
+commit dfeafc2060112e31666058218bb530a3b6743aed
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Fri Mar 27 16:05:39 2020 -0400
+
+    Integrated zoom_in and blur into Final
+
+commit 1c0fd95fdb4efa966948f837dc19be3cf40079fc
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Fri Mar 27 13:24:48 2020 -0400
+
+    Added error condition
+
+commit 6e6ee807e8d7c6e33a5c16b19cebc87021fb2177
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Thu Mar 26 19:38:44 2020 -0400
+
+    Makefile, change_exposure, and command line arguments functional
+
+commit 13614e76afcf07a465bedda37646636d3c80571c
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Thu Mar 26 16:52:06 2020 -0400
+
+    Created 'Final' where everything will be in
+
+commit d29966fd18325393937d828ad49d04709066a9f7
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Wed Mar 25 19:56:04 2020 -0400
+
+    Minor fixes
+
+commit ae062ebb02cb078b0aa22a67f13f9980760af235
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Wed Mar 25 19:53:26 2020 -0400
+
+    Fixed read for if there were no comments
+
+commit 18be1e18c30910fc3df93d97bb6f0932228b21a7
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Wed Mar 25 19:52:03 2020 -0400
+
+    Fixed read if there were no comments
+
+commit a5567002bb9b7626a38b9bc8f59cc6c10fce0e2c
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Wed Mar 25 18:55:57 2020 -0400
+
+    Wrote code to call Wilson's functions
+
+commit 2c08be40f2b5edd4656ea965a3a3b79069b7be18
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Wed Mar 25 18:40:06 2020 -0400
+
+    Name changes
+
+commit bc7b4624ea052da742059140a00728efe0451169
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Tue Mar 24 12:53:09 2020 -0400
+
+    Program to read user input and call functions
+
+commit 13184ebbb4e8a5f6b98467535ed088ed27a1c29e
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Tue Mar 24 11:32:10 2020 -0400
+
+    Added stderr output
+
+commit dbbd035647e91494c010d2a676cb5029b130c1d6
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Tue Mar 24 11:10:59 2020 -0400
+
+    Changed malloc to calloc
+
+commit fadd1e0028be61fe9c4a251332b7f048151e4555
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Tue Mar 24 11:10:31 2020 -0400
+
+    Changed mallocs to callocs
+
+commit 9ab52c255bf464af83b78f5aaba220d68f1d0b29
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Mon Mar 23 18:57:32 2020 -0400
+
+    It's working!
+
+commit 922456f186df1d522e533d3c282ef05f0a8a7a37
+Merge: 32cf1f8 0dd571c
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Sun Mar 22 23:46:09 2020 -0400
+
+    Merge branch 'master' of https://bitbucket.org/thesonofwil/midterm-project
+
+commit 32cf1f8a907e5b071637b04339a6509a736bdd11
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Sun Mar 22 23:45:01 2020 -0400
+
+    work on swirl
+
+commit 0dd571c3f94d487f3777a682cd994600f5f18969
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Sun Mar 22 22:54:21 2020 -0400
+
+    Need to check why not working when blur = 2 or 5
+
+commit ad27e7f89b1fc33b0c75706bc4f02e8b98808bab
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Sun Mar 22 16:24:35 2020 -0400
+
+    Debugging
+
+commit 89e12e70943e32149f19bd1b17ccb888a158733d
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Sun Mar 22 14:41:37 2020 -0400
+
+    Need to make it more efficient
+
+commit 26adbd935fc32e2688674ffe88185d29a38f40c9
+Merge: 90bee2c 8df0b46
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Sun Mar 22 14:40:38 2020 -0400
+
+    Merge branch 'master' of https://bitbucket.org/thesonofwil/midterm-project
+
+commit 90bee2cf14d642a21c30b5b733205dd56b0eb263
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Sun Mar 22 14:39:58 2020 -0400
+
+    Need to make it more efficient
+
+commit 8df0b46d0b7e4202bf8e215ae8235e79314bcd6b
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Sun Mar 22 14:32:51 2020 -0400
+
+    work on swirl
+
+commit 3cfdcaa9b0786f68a2abc9ab4b6898d625c8790e
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Sun Mar 22 12:46:35 2020 -0400
+
+    Compiles
+
+commit f0515f15c7135a278e363f18f6e90e6e1dcf1669
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Fri Mar 20 20:07:47 2020 -0400
+
+    ppm_io should be finalized
+
+commit 19481e50d4347debc51059e01bfb85a35b4dfcee
+Merge: 323e637 b4f5ab5
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Fri Mar 20 20:01:45 2020 -0400
+
+    Merge branch 'master' of https://bitbucket.org/thesonofwil/midterm-project
+
+commit 323e63748b595a946b752dbcf85e408d39505c0b
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Fri Mar 20 20:01:21 2020 -0400
+
+    Need extensive testing now
+
+commit b4f5ab52c5387b35f6c6bb369261e048f944b14c
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Fri Mar 20 13:38:20 2020 -0400
+
+    more work on swirl
+
+commit 36d72397e715d6abba8b54cb9971b594ad5fc055
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Fri Mar 20 12:58:23 2020 -0400
+
+    Some more work - 1D implementation
+
+commit 7ae18c15559ff03578f8ce1001f1dfa2bba2184f
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Thu Mar 19 20:18:08 2020 -0400
+
+    worked on function to swirl pixels in image
+
+commit d050a9c9a0d6809cdfaeca501ce7dd427a3ef0d9
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Thu Mar 19 11:29:27 2020 -0400
+
+    More work on blur
+
+commit 47320eb771b830899853960e769350a3a7a9d43f
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Wed Mar 18 16:30:51 2020 -0400
+
+    Some more work
+
+commit fb78c4a2d65d207a07a19c297442e6ab1084e1e0
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Tue Mar 17 15:20:19 2020 -0400
+
+    Added the gauss filter matrix function
+
+commit e2f48ed1645a3594a20905cb30831312be4a5342
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Tue Mar 17 13:06:57 2020 -0400
+
+    Started working on blur
+
+commit 79dccbc767d99e5a9e831accaab99c14442d5e7e
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Mon Mar 16 13:06:36 2020 -0400
+
+    started working on swirl
+
+commit 4d777eeaa0297754d2444ea6086abe7ca73e3f4f
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Fri Mar 13 16:48:40 2020 -0400
+
+    Started working on pointilism
+
+commit 048b8e4d354dae59d923509da518d94d2ff24432
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Fri Mar 13 16:11:22 2020 -0400
+
+    Added error condition
+
+commit 62a5d137eda72ed1d802bed913d2634417b94dd8
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Fri Mar 13 15:06:13 2020 -0400
+
+    Wrote a working zoom_in function
+
+commit 4abb76d07035e3f0dbae4a3393aaaf7c471b4d49
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Thu Mar 12 06:43:22 2020 -0400
+
+    working on alpha blend fcn 2
+
+commit a38361c6cd85fbfabb3f61e313396d5fdb5141ee
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Thu Mar 12 04:31:27 2020 -0400
+
+    working on alpha blending fcn
+
+commit 26d5959737b9a26471fd8bbdb0aacd49ea4063d0
+Merge: e766771 78d8cf7
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Tue Mar 10 21:52:44 2020 -0400
+
+    Merge branch 'master' of https://bitbucket.org/thesonofwil/midterm-project
+
+commit e766771e6cc392cbb5b759dc4e3ce0c1483f33f2
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Tue Mar 10 21:52:11 2020 -0400
+
+    alpha blending function
+
+commit 78d8cf794f066eb9f15e7e923af957d29be0709c
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Tue Mar 10 20:03:02 2020 -0400
+
+    Change Exposure function is functional
+
+commit 95932f264a4bdd787f524515029c5610df34964b
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Tue Mar 10 19:56:14 2020 -0400
+
+    read_ppm working correctly
+
+commit 447fbd51eff1979bc9bbadacb0fd6b955cbcf3f9
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Mon Mar 9 18:16:42 2020 -0400
+
+    Tentative build of change_exposure
+
+commit 455129c28eb19ff96988a79e0007a41e71258eef
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Mon Mar 9 18:16:14 2020 -0400
+
+    Deleted more print statements
+
+commit 73115cfa546fc86c12dc2d5924a18d1f69c255c2
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Mon Mar 9 18:06:39 2020 -0400
+
+    Deleted print statements
+
+commit 39769d5db9206b662280ef871a9c7b19c83dbce2
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Mon Mar 9 17:26:25 2020 -0400
+
+    Copied over ppm_io.c
+
+commit 7d3f66edefbae94e15e03b33a12ed3edd64b4d44
+Merge: 07b3e32 5fc56d1
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Mon Mar 9 17:02:20 2020 -0400
+
+    a
+
+commit 07b3e32afdae4e390ca0a4e385506d14ba79a0f4
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Mon Mar 9 16:57:26 2020 -0400
+
+    Reading ppm method now working
+
+commit 5fc56d1536459324edb5d3b71b7cbc61698267fd
+Merge: df08ac2 56ac16e
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Fri Mar 6 18:11:27 2020 -0500
+
+    added main
+
+commit df08ac26b9d2a71b07b31b95e0d172b07520743c
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Fri Mar 6 18:10:12 2020 -0500
+
+    added main
+
+commit 56ac16ef80c112426f431161a0eb5a0639e104e5
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Fri Mar 6 18:06:00 2020 -0500
+
+    Testing
+
+commit bc20cec210d2061e07ad9ac32c57b16f55aaf3a2
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Fri Mar 6 17:28:25 2020 -0500
+
+    Made separate Methods directory
+
+commit fa9e665dc9ca9ad1a06c56e148b0e5e7a24b80af
+Merge: 948a97e b65938d
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Fri Mar 6 17:20:12 2020 -0500
+
+    Test
+
+commit 948a97e3cea31eec6b59859b70bef872750ecea6
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Fri Mar 6 16:46:52 2020 -0500
+
+    test
+
+commit b65938d515dd90e5b6a7b5d8c06e016e757683a1
+Author: aegbe2 <lax18christian@gmail.com>
+Date:   Fri Mar 6 16:43:20 2020 -0500
+
+    added blend function
+
+commit eede23de2f49c8406adb36922e172d8edfb5c853
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Fri Mar 6 16:40:11 2020 -0500
+
+    Minor changes
+
+commit d971bfc80ca7a1b64a3d75c1411cd4a36537c6cc
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Fri Mar 6 16:12:29 2020 -0500
+
+    Filled in read_ppm function
+
+commit 0bb3210d62102be7440a299b48cf208215d87cc8
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Mon Mar 2 11:11:36 2020 -0500
+
+    More comments
+
+commit af8a8c4cad4e47deb6a898dc3bf50bfb125b656d
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Mon Mar 2 10:33:50 2020 -0500
+
+    to do list on imageManip.c
+
+commit b73d9479c4236ba94802a98811c7c9649695f97a
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Mon Mar 2 10:05:32 2020 -0500
+
+    c file to implement image manipulation algorithms
+
+commit 6d8eafabff5d2cec714eaa621fe2db6648178fda
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Fri Feb 28 09:51:20 2020 -0500
+
+    Added starter code
