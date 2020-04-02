@@ -31,7 +31,7 @@ float convert_parameter(char *arg) {
   float parameter = strtof(arg, &check);
   if (strlen(check) > 0) { // i.e. argument contains non-numeric symbols, argument is a string
     fprintf(stderr, "Error: specified argument must be a number. \n");
-    exit(5);
+    exit(6);
   }
 
   return parameter;

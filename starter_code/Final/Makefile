@@ -3,14 +3,8 @@ CFLAGS=-std=c99 -pedantic -Wall -Wextra -g
 LDLIBS=-lm
 
 # Create the project executable
-# Add methods here
-<<<<<<< HEAD
-project: project.o ppm_io.o imageManip.o change_exposure.o zoom_in.o blur.o pointilism.o  swirl.o zoom_out.o alpha_blending.o 
-	$(CC) $(LDLIBS) -o project project.o ppm_io.o imageManip.o change_exposure.o zoom_in.o blur.o pointilism.o swirl.o zoom_out.o alpha_blending.o -lm
-=======
 project: project.o ppm_io.o imageManip.o change_exposure.o zoom_in.o blur.o pointilism.o  swirl.o zoom_out.o alpha_blending.o
 	$(CC) -o project project.o ppm_io.o imageManip.o change_exposure.o zoom_in.o blur.o pointilism.o swirl.o zoom_out.o alpha_blending.o $(LDLIBS)
->>>>>>> 7d4af7f8569d8bbc553a83ff1828210e5ab4d094
 
 project.o: project.c
 	$(CC) $(CFLAGS) -c project.c

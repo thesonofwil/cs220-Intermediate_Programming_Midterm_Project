@@ -1,3 +1,76 @@
+commit 958e968dc6334706f0202149f1d418361da09578
+Merge: a82ff67 7d4af7f
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Thu Apr 2 16:44:16 2020 -0400
+
+    Merge branch 'master' of https://bitbucket.org/thesonofwil/midterm-project
+
+commit a82ff6798385e85b8b474fbbb50f3aa400919895
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Thu Apr 2 16:38:52 2020 -0400
+
+    work
+
+commit cd8f65126caad1631bb604b97d124fbd60dc7368
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Thu Apr 2 16:35:45 2020 -0400
+
+    fixed wrror with number returning
+
+commit 0e36a95280c6e352c619652fb7d403d520e6e54d
+Author: Marcelo <lmoral10@jhu.edu>
+Date:   Thu Apr 2 16:34:18 2020 -0400
+
+    fixed what number is being returned when fail
+
+commit 7d4af7f8569d8bbc553a83ff1828210e5ab4d094
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Thu Apr 2 16:26:12 2020 -0400
+
+    Fixes
+
+commit 553f426253a80c20be92b9407c5a627abd179801
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Thu Apr 2 16:25:27 2020 -0400
+
+    Fixes
+
+commit 41694eb0517b6ad26317da5151e43d9e3933c435
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Thu Apr 2 16:07:47 2020 -0400
+
+    Minor fixes
+
+commit bd426cd0d7c36ef86b4ec91d31784ae514a12cb1
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Thu Apr 2 16:03:22 2020 -0400
+
+    Minor fixes
+
+commit d1510ec8508473593726207e095dcbd8f3bf7971
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Thu Apr 2 16:01:53 2020 -0400
+
+    Added error condition for blend
+
+commit ea653e221bda0811f77097479520522b008a0fab
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Thu Apr 2 15:58:34 2020 -0400
+
+    Added error condition
+
+commit 4da7b8a63350479d02f48cfac02514ceb8de5724
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Thu Apr 2 15:24:58 2020 -0400
+
+    Added project object file
+
+commit efb222d1eaa28ef5d8dd065511535f44abdf1c95
+Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
+Date:   Thu Apr 2 14:33:38 2020 -0400
+
+    Added imageManip and fixed other errors
+
 commit 934223ee65d88d859e29243f93d5561ca835ef9c
 Author: Wilson Tjoeng <wtjoeng1@jhu.edu>
 Date:   Thu Apr 2 13:37:00 2020 -0400
