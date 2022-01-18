@@ -7,5 +7,3 @@
 Wilson Tjoeng: ppm_io, change_exposure, alpha_blending, zoom_in, zoom_out, blur
 
 Marcelo Morales: pointilism, swirl
-
-Anire Egbe: not much - wrote broken, illegible code that had to be rewritten by others
